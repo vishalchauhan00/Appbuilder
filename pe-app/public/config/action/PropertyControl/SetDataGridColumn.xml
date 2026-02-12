@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="setDataGridColumn" category="ControlAction" type="Property" method="setDataGridColumn"
+		helpLink_EN="" helpLink_JP="‌">
+	<properties>
+		<type name="parameters" input="None">
+			<property path="params.name" input="spark.components.DropDownList" >
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			    <dataSource source="{@base:getSpecificTargetUIParts(@page:pageid, @form[base.currentSettings]:value)}" labelField="uiname" valueField="uiname"/>
+			</property>
+			<property path="params.operation" input="spark.components.DropDownList" copyable="true">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+				<dataSource>
+				 	<data name="add"/>
+				 	<data name="delete"/>
+			  	</dataSource>
+				<dependentActions>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[params.operation]:value}" compareBy="EQ" compareWith="add">
+						<action target="{@form[params.heading]:}" method="folded" value="false" caseOf="true"/> 
+						<action target="{@form[params.width]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.isSearchable]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.isEditable]:}" method="folded" value="false" caseOf="true"/>
+					</when>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[params.operation]:value}" compareBy="EQ" compareWith="delete">
+						<action target="{@form[params.heading]:}" method="folded" value="true" caseOf="true"/> 
+						<action target="{@form[params.width]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.isSearchable]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.isEditable]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.editableField[0].name]:}" method="folded" value="true" caseOf="true"/> 
+						<action target="{@form[params.editableField[0].actions.DidBeginEditing]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.editableField[0].actions.DidChange]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.editableField[0].actions.DidEndEditing]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.editableField[0].actions.DidEndEditingError]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.editableField[0].actions.DidPressEnter]:}" method="folded" value="true" caseOf="true"/>
+					</when>			
+				</dependentActions>
+			</property>
+			<property path="params.fieldname" input="spark.components.TextInput">
+				<validations>
+					<validation validator="RequiredValueValidator" />
+				</validations>
+			</property>
+			<property path="params.heading" input="spark.components.TextInput">
+			</property>
+			<property path="params.width" input="spark.components.NumericStepper" min="10" max="1000" inc="5" init="100">
+				<validations>
+					<validation validator="RequiredValueValidator" />
+				</validations>
+			</property>
+			<property path="params.isSearchable" input="spark.components.CheckBox">
+			</property>
+			<property path="params.isEditable" input="spark.components.CheckBox">
+				<dependentActions>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[params.isEditable]:value}" compareBy="EQ" compareWith="1">
+						<action target="{@form[params.editableField[0].name]:}" method="folded" value="false" caseOf="true"/> 
+						<action target="{@form[params.editableField[0].actions.DidBeginEditing]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.editableField[0].actions.DidChange]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.editableField[0].actions.DidEndEditing]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.editableField[0].actions.DidEndEditingError]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.editableField[0].actions.DidPressEnter]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.editableField[0].name]:}" method="folded" value="true" caseOf="false"/> 
+						<action target="{@form[params.editableField[0].actions.DidBeginEditing]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.editableField[0].actions.DidChange]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.editableField[0].actions.DidEndEditing]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.editableField[0].actions.DidEndEditingError]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.editableField[0].actions.DidPressEnter]:}" method="folded" value="true" caseOf="false"/>
+					</when>	
+				</dependentActions>
+			</property>
+			<property path="params.editableField[0].name" input="spark.components.TextInput">
+				<validations>
+					<validation validator="RequiredValueValidator" />
+				</validations>
+			</property>
+			<property formKey="params.editableField[0].actions.DidBeginEditing" path="params.editableField[0].actions.DidBeginEditing" input="LabelWithButton"/>
+			<property formKey="params.editableField[0].actions.DidChange" path="params.editableField[0].actions.DidChange" input="LabelWithButton"/>
+			<property formKey="params.editableField[0].actions.DidEndEditing" path="params.editableField[0].actions.DidEndEditing" input="LabelWithButton"/>
+			<property formKey="params.editableField[0].actions.DidEndEditingError" path="params.editableField[0].actions.DidEndEditingError" input="LabelWithButton"/>
+			<property formKey="params.editableField[0].actions.DidPressEnter" path="params.editableField[0].actions.DidPressEnter" input="LabelWithButton"/>
+		</type>
+		<type name="condition" input="HRule">
+			<property path="params.condition" input="LabelWithButton"/>
+		</type>
+		<type name="resultEvents" input="HRule">
+			<property path="actions.success" input="LabelWithButton"/>
+			<property path="actions.error" input="LabelWithButton"/>
+		</type>
+	</properties>
+</item>

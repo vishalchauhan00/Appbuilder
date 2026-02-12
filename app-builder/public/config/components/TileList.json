@@ -1,0 +1,629 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "TileList",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_tilelist.png",
+      "description": "Here is the label description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "direction": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "Horizontal",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "Horizontal"
+              },
+              {
+                "name": "Vertical"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[direction]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Horizontal",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[paging]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[circular]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[showarrow]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[isAccordian]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[collapsible]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accRecordsCount]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderHeight]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderBorderWeight]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderBGColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderTextColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderIconPosition]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderIconClose]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderIconOpen]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[Groupby]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[direction]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Vertical",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[paging]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[circular]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[showarrow]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[paging]:}",
+                    "method": "setValue",
+                    "value": "0",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[circular]:}",
+                    "method": "setValue",
+                    "value": "0",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[isAccordian]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "method": "dependentConditions",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "paging": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "circular": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "showarrow": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "shownext": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          }
+        }
+      },
+      "DBSettings": {
+        "properties": {
+          "ServiceName": {
+            "input": "DropDownList",
+            "dataSource": [],
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "initForm",
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[tablename]:}",
+                    "method": "setOptions",
+                    "value": "{@project:getDbTableDicsByServiceName(@form[ServiceName]:value)}"
+                  },
+                  {
+                    "target": "{@form[tablename]:}",
+                    "method": "setProperty",
+                    "value": "-1"
+                  },
+                  {
+                    "target": "{@form[fieldname]:}",
+                    "method": "setOptions",
+                    "value": "{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}"
+                  },
+                  {
+                    "target": "{@form[Groupby]:}",
+                    "method": "setOptions",
+                    "value": "{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "tablename": {
+            "input": "DropDownList",
+            "dataSource": [],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[tablename]:value}",
+                  "compareBy": "NE",
+                  "compareWith": "",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[fieldname]:}",
+                    "method": "setOptions",
+                    "value": "{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[Groupby]:}",
+                    "method": "setOptions",
+                    "value": "{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "where": {
+            "input": "TextInput"
+          },
+          "sort": {
+            "input": "TextInput"
+          },
+          "limit": {
+            "input": "NumericStepper",
+            "init": "0",
+            "min": "0",
+            "max": "50"
+          },
+          "isAccordian": {
+            "input": "CheckBox",
+            "init": "0",
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[isAccordian]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "0",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[accRecordsCount]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accRecordsCount]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[accHeaderHeight]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderHeight]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[accHeaderBorderWeight]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderBorderWeight]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[accHeaderBGColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderBGColor]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[accHeaderTextColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderTextColor]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[accHeaderIconPosition]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderIconPosition]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[accHeaderIconClose]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderIconClose]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[accHeaderIconOpen]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[accHeaderIconOpen]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[Groupby]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[Groupby]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[collapsible]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[collapsible]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "Groupby": {
+            "input": "DropDownList"
+          },
+          "collapsible": {
+            "input": "CheckBox",
+            "init": "0"
+          },
+          "accRecordsCount": {
+            "input": "CheckBox",
+            "init": "1"
+          },
+          "accHeaderHeight": {
+            "input": "NumericStepper",
+            "init": "32",
+            "min": "32",
+            "max": "56",
+            "copyable": true
+          },
+          "accHeaderBorderWeight": {
+            "input": "NumericStepper",
+            "init": "1",
+            "min": "0",
+            "max": "10",
+            "copyable": true
+          },
+          "accHeaderBGColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "init": "0"
+          },
+          "accHeaderTextColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "init": "0"
+          },
+          "accHeaderIconPosition": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "left",
+            "dataSource": [
+              {
+                "name": "left"
+              },
+              {
+                "name": "right"
+              }
+            ]
+          },
+          "accHeaderIconClose": {
+            "input": "TextInputWithButton"
+          },
+          "accHeaderIconOpen": {
+            "input": "TextInputWithButton"
+          }
+        }
+      },
+      "Items": {
+        "properties": {
+          "dataarray[0].rows": {
+            "input": "NumericStepper",
+            "init": "1",
+            "min": "1",
+            "max": "100",
+            "copyable": true
+          },
+          "dataarray[0].columns": {
+            "input": "NumericStepper",
+            "init": "1",
+            "min": "1",
+            "max": "100",
+            "copyable": true
+          },
+          "dataarray[0].gap": {
+            "input": "NumericStepper",
+            "init": "4",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "dataarray[0]": {
+            "input": "LabelWithButton",
+            "popup": "CellEditor",
+            "source": "TileList",
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "preCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[dataarray[0].Fields]:}",
+                    "method": "{@base:notifyChange()}"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "Padding": {
+        "properties": {
+          "padding.top": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.left": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.right": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.bottom": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "320",
+            "min": "50",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "108",
+            "min": "10",
+            "max": "10000",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

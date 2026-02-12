@@ -1,0 +1,306 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "VideoBox",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_movie.png",
+      "description": "Here is the label description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "label": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "video.srcLocation": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "bundle",
+            "dataSource": [
+              {
+                "name": "bundle"
+              },
+              {
+                "name": "url"
+              },
+              {
+                "name": "googlemedia"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[video.srcLocation]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "bundle",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[bundleVideo]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[urlVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[remoteVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[video.srcLocation]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "url",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[bundleVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[urlVideo]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[remoteVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[video.srcLocation]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "remoteFile",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[bundleVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[urlVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[remoteVideo]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[video.srcLocation]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "gallery",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[bundleVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[urlVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[remoteVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[video.srcLocation]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "googlemedia",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[bundleVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[urlVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[remoteVideo]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "at": [
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[urlVideo]:}",
+                    "method": "setValue",
+                    "value": "{@base:video.videoName}"
+                  }
+                ]
+              }
+            ]
+          },
+          "video": {
+            "input": "TextInputWithButton",
+            "dataType": "VideoFileDic",
+            "copyable": true
+          },
+          "video.videoName": {
+            "input": "TextInput",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[remoteVideo]:}",
+                    "method": "setValue",
+                    "value": "{@base:video.videoName}"
+                  }
+                ]
+              }
+            ]
+          },
+          "startPlay": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "0",
+            "copyable": true
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Actions": {
+        "properties": {
+          "actions.didPausePlayMovie": {
+            "input": "LabelWithButton"
+          },
+          "actions.didStartPlayMovie": {
+            "input": "LabelWithButton"
+          },
+          "actions.didStopPlayMovie": {
+            "input": "LabelWithButton"
+          },
+          "actions.didFinishPlayMovie": {
+            "input": "LabelWithButton"
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "320",
+            "min": "150",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "240",
+            "min": "150",
+            "max": "9999",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

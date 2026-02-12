@@ -1,0 +1,82 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "Camera",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_camera.png",
+      "description": "Here is the CameraPicker description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "cameraSide": {
+            "input": "DropDownList",
+            "init": "rear",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "rear"
+              },
+              {
+                "name": "front"
+              }
+            ]
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Actions": {
+        "properties": {
+          "actions.didFinishPickingMedia": {
+            "input": "LabelWithButton"
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "150",
+            "min": "150",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "150",
+            "min": "150",
+            "max": "9999",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

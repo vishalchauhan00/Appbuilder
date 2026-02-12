@@ -1,0 +1,284 @@
+[
+    {
+      "pageCSS": [
+        {
+          "name": "body",
+          "label": "Page Area",
+          "children": [
+            {
+              "name": "background-color",
+              "label": "Background Color",
+              "type": "color",
+              "value": "#ffffff"
+            },
+            {
+              "name": "background-gradient",
+              "label": "Background Gradient",
+              "type": "input",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "table",
+          "label": "Table Cell",
+          "children": [
+            {
+              "name": "cell-color",
+              "label": "Cell Background Color",
+              "type": "color",
+              "value": "#ffffff"
+            },
+            {
+              "name": "alternate-cell-color",
+              "label": "Alternate Cell Color 2",
+              "type": "color",
+              "value": "#ffffff"
+            },
+            {
+              "name": "background-gradient",
+              "label": "Background Gradient",
+              "type": "input",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "topnav",
+          "label": "Top Toolbar",
+          "children": [
+            {
+              "name": "visible",
+              "label": "Visible",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "background-color",
+              "label": "Background Color",
+              "type": "color",
+              "value": "#8ea6c7"
+            },
+            {
+              "name": "background-gradient",
+              "label": "Background Gradient",
+              "type": "input",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "bottomnav",
+          "label": "Bottom Toolbar",
+          "children": [
+            {
+              "name": "visible",
+              "label": "Visible",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "background-color",
+              "label": "Background Color",
+              "type": "color",
+              "value": "#8ea6c7"
+            },
+            {
+              "name": "background-gradient",
+              "label": "Background Gradient",
+              "type": "input",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "leftnav",
+          "label": "Left Sidebar",
+          "children": [
+            {
+              "name": "visible",
+              "label": "Visible",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "background-color",
+              "label": "Background Color",
+              "type": "color",
+              "value": "#8ea6c7"
+            },
+            {
+              "name": "background-gradient",
+              "label": "Background Gradient",
+              "type": "input",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "name": "rightnav",
+          "label": "Right Sidebar",
+          "children": [
+            {
+              "name": "visible",
+              "label": "Visible",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "background-color",
+              "label": "Background Color",
+              "type": "color",
+              "value": "#8ea6c7"
+            },            
+            {
+              "name": "background-gradient",
+              "label": "Background Gradient",
+              "type": "input",
+              "value": ""
+            }
+          ]
+        }    
+      ]
+    },
+    {
+      "uiCSS": [
+        {
+          "name": "background",
+          "label": "Background",
+          "children": [
+            {
+              "name": "gradient",
+              "label": "Gradient",
+              "type": "input",
+              "value": ""
+            },
+            {
+              "name": "color",
+              "label": "Color",
+              "type": "color",
+              "value": "#ffffff"
+            },
+            {
+              "name": "alpha",
+              "label": "Transparency",
+              "type": "number",
+              "properties": [{"step":"0.1"},{"min":"0"},{"max":"1"}],
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "name": "border",
+          "label": "Border",
+          "children": [
+            {
+              "name": "color",
+              "label": "Color",
+              "type": "color",
+              "value": "#000000"
+            },
+            {
+              "name": "alpha",
+              "label": "Transparency",
+              "type": "number",
+              "properties": [{"step":"0.1"},{"min":"0"},{"max":"1"}],
+              "value": "1"
+            },
+            {
+              "name": "width",
+              "label": "Width",
+              "type": "number",
+              "properties": [{"step":"1"},{"min":"0"},{"max":"10"}],
+              "value": "1"
+            },
+            {
+              "name": "radius",
+              "label": "Radius",
+              "type": "number",
+              "properties": [{"step":"1"},{"min":"0"},{"max":"24"}],
+              "value": "0"
+            }
+          ]
+        },
+        {
+          "name": "font",
+          "label": "Font",
+          "children": [
+            {
+              "name": "family",
+              "label": "Family Name",
+              "type": "options",
+              "options": [{"label":"system"}],
+              "value": "system"
+            },
+            {
+              "name": "size",
+              "label": "Size",
+              "type": "number",
+              "properties": [{"step":"1"},{"min":"6"},{"max":"64"}],
+              "value": "14"
+            },
+            {
+              "name": "weight",
+              "label": "Weight",
+              "type": "options",
+              "options": [{"label":"100"},{"label":"200"},{"label":"300"},{"label":"400"},{"label":"500"},{"label":"600"},{"label":"700"},{"label":"800"},{"label":"900"}],
+              "value": "400"
+            },
+            {
+              "name": "style",
+              "label": "Style",
+              "type": "options",
+              "options": [{"label":"normal"},{"label":"italic"}],
+              "value": "normal"
+            }
+          ]
+        },
+        {
+          "name": "text",
+          "label": "Text",
+          "children": [
+            {
+              "name": "color",
+              "label": "Color",
+              "type": "color",
+              "value": "#000000"
+            },
+            {
+              "name": "align",
+              "label": "Alignment",
+              "type": "options",
+              "options": [{"label":"left"},{"label":"right"},{"label":"center"}],
+              "value": "center"
+            },
+            {
+              "name": "valign",
+              "label": "Vertical Alignment",
+              "type": "options",
+              "options": [{"label":"top"},{"label":"bottom"},{"label":"middle"}],
+              "value": "middle"
+            },
+            {
+              "name": "underline",
+              "label": "Underline",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "line-through",
+              "label": "Strike-through",
+              "type": "boolean",
+              "value": false
+            },
+            {
+              "name": "shadow",
+              "label": "Shadow",
+              "type": "boolean",
+              "value": false
+            }
+          ]
+        }
+      ]
+    }
+  ]

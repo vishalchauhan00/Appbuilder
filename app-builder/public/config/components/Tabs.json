@@ -1,0 +1,530 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "Tabs",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_header.png",
+      "description": "Here is the label description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "direction": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "Horizontal",
+            "copyable": true,
+            "disable": true,
+            "dataSource": [
+              {
+                "name": "Horizontal"
+              }
+            ]
+          },
+          "initialValue": {
+            "input": "TextInput",
+            "copyable": true,
+            "validators": [
+              "RequiredValueValidator"
+            ]
+          },
+          "scrollable": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "showElevation": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "disable": true
+          },
+          "enableRipple": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "disable": true
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "tintColor": {
+            "input": "ColorPicker",
+            "copyable": true
+          },
+          "borderColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "borderColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "cornerRadius": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "25",
+            "copyable": true
+          }
+        }
+      },
+      "Items": {
+        "properties": {
+          "itemWidth": {
+            "input": "NumericStepper",
+            "init": "80",
+            "min": "30",
+            "max": "500",
+            "copyable": true
+          },
+          "itemGap": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "50",
+            "copyable": true
+          },
+          "tabItems[0].font.textColor": {
+            "input": "ColorPicker",
+            "copyable": true
+          },
+          "tabItems": {
+            "input": "List",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "initForm",
+                    " postIndexChange"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[tabItems[*].type]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].type}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].type]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].type\"}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].imageDic]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].imageDic}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].imageDic]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].imageDic\"}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].text]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].text}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].text]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].text\"}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontName]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].font.fontName}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontName]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].font.fontName\"}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontSize]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].font.fontSize}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontSize]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].font.fontSize\"}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontWeightNum]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].font.fontWeightNum}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontWeightNum]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].font.fontWeightNum\"}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapTintColor]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].onTapTintColor}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapTintColor]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].onTapTintColor\"}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapTextColor]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].onTapTextColor}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapTextColor]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].onTapTextColor\"}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapfontWeightNum]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].onTapfontWeightNum}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapfontWeightNum]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].onTapfontWeightNum\"}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].actions.clicked]:}",
+                    "method": "setValue",
+                    "value": "{@base:tabItems[@form[tabItems]:selectedIndex].actions.clicked}"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].actions.clicked]:}",
+                    "method": "setPath",
+                    "value": "{\"tabItems[\" + @form[tabItems]:selectedIndex + \"].actions.clicked\"}"
+                  }
+                ]
+              }
+            ]
+          },
+          "tabItems[*].type": {
+            "input": "DropDownList",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "TextItem"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[tabItems[*].type]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "TextItem",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[tabItems[*].text]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].text]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontName]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontName]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontSize]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontSize]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontWeightNum]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].font.fontWeightNum]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapTextColor]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapTextColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapTintColor]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapTintColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapfontWeightNum]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[tabItems[*].onTapfontWeightNum]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "tabItems[*].text": {
+            "input": "TextInput",
+            "copyable": true
+          },
+          "tabItems[*].font.fontName": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "system",
+            "copyable": true,
+            "dataSource": []
+          },
+          "tabItems[*].font.fontSize": {
+            "input": "NumericStepper",
+            "dataType": "Numeric",
+            "init": "12",
+            "min": "6",
+            "max": "300",
+            "copyable": true
+          },
+          "tabItems[*].font.fontWeight": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "disable": true
+          },
+          "tabItems[*].font.fontWeightNum": {
+            "input": "DropDownList",
+            "dataType": "Number",
+            "init": "400",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "100"
+              },
+              {
+                "name": "200"
+              },
+              {
+                "name": "300"
+              },
+              {
+                "name": "400"
+              },
+              {
+                "name": "500"
+              },
+              {
+                "name": "600"
+              },
+              {
+                "name": "700"
+              },
+              {
+                "name": "800"
+              },
+              {
+                "name": "900"
+              }
+            ]
+          },
+          "tabItems[*].onTapTextColor": {
+            "input": "ColorPicker"
+          },
+          "tabItems[*].onTapTintColor": {
+            "input": "ColorPicker"
+          },
+          "tabItems[*].onTapFontWeight": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "disable": true
+          },
+          "tabItems[*].onTapFontWeightNum": {
+            "input": "DropDownList",
+            "dataType": "Number",
+            "init": "400",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "100"
+              },
+              {
+                "name": "200"
+              },
+              {
+                "name": "300"
+              },
+              {
+                "name": "400"
+              },
+              {
+                "name": "500"
+              },
+              {
+                "name": "600"
+              },
+              {
+                "name": "700"
+              },
+              {
+                "name": "800"
+              },
+              {
+                "name": "900"
+              }
+            ]
+          },
+          "tabItems[*].actions.clicked": {
+            "input": "LabelWithButton"
+          },
+          "showsSelectionIndicator": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[showsSelectionIndicator]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "0",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[indicatorColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[indicatorColor]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "indicatorColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "88",
+            "min": "10",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "44",
+            "min": "5",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.rotation": {
+            "input": "NumericStepper",
+            "min": "0",
+            "max": "360",
+            "copyable": true,
+            "disable": true
+          }
+        }
+      }
+    }
+  }
+}

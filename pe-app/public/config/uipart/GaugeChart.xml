@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="GaugeChart" mockup="com.mobilous.builder.client.pageeditor.editor.mockup.Chart.ChartUI" imagePath="assets/toolbox/ico_chart.png" description=""
+		visible="true" visibleInTableView="false" helpLink_EN="" helpLink_JP="">
+	<properties>
+		<type name="Type" @stopCommit="true">
+			<property path="name" input="spark.components.TextInput">
+				<validations>
+					<validation validator="UniqUINameValidator">
+						<args>
+							<arg property="currentSettings" value="{@currentSettings:}"/>
+							<arg property="pageContainerDic" value="{@page:}"/>
+							<arg property="uiPartDic" value="{@base:}"/>
+							<arg property="tableViewCellDic" value="{@tableviewCell:}"/>
+							<arg property="toolbarUiDic" value="{@toolbarUiDic:}"/>
+						</args>
+					</validation>
+				</validations>
+			</property>
+			<property path="hidden" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property path="toggleFullScreen" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property path="provider" input="spark.components.DropDownList" init="ECharts">
+				<dataSource>
+					<data name="ECharts"/>		
+				</dataSource>
+			</property>
+		</type>
+		
+		<type name="Datablocks">
+			<property path="ServiceName" input="spark.components.DropDownList">
+				<dataSource source="@project:getServices()" labelField="label" valueField="value"/>
+				<dependentActions>
+					<when at="initForm,postCommit" stopCommit="true">
+						<action target="{@form[tablename]:}" method="setOptions" value="{@project:getDbTableDicsByServiceName(@form[ServiceName]:value)}" labelField="tablename" valueField="tablename"/>
+						<action target="{@form[tablename]:}"  method="setProperty" property="selectedIndex" value="-1" caseOf="true"/> 
+					</when>
+				</dependentActions>
+			</property>
+			<property path="tablename" input="spark.components.DropDownList">
+				<dataSource source="@project:getDbTableDicsByServiceName(@form[ServiceName]:value)" labelField="tablename" valueField="tablename"/>
+			</property>
+			<property path="where" input="spark.components.TextInput" validator="whereClauseValidator"/>
+			<property path="sort" input="spark.components.TextInput"/>
+		</type>
+		
+		<type name="ChartOptions">			
+			<property path="title.text" dataType="String" input="spark.components.TextInput" copyable="true"/>
+ 			<property path="title.subtext" dataType="String" input="spark.components.TextInput" disable="true"/>
+			<property path="title.left" input="spark.components.DropDownList" init="center">
+				<dataSource>
+					<data name="center"/>
+					<data name="left"/>
+					<data name="right"/>				
+				</dataSource>
+			</property>
+			<property path="showLegends" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true">
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[showLegends]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[legend.bottom]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[legend.bottom]:}" method="folded" value="true" caseOf="false"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property path="legend.bottom" dataType="Number" input="spark.components.NumericStepper" min="0" max="500" inc="1" init="0" copyable="true"/>
+			<property path="tooltip.formatter" dataType="String" input="spark.components.TextArea" heightInLines="2" copyable="true"/>
+			<property path="startAngle" dataType="Number" input="spark.components.NumericStepper" min="90" max="270" inc="1" init="225" copyable="true"/>
+			<property path="endAngle" dataType="Number" input="spark.components.NumericStepper" min="-90" max="90" inc="1" init="-45" copyable="true"/>
+			<property path="min" dataType="Number" input="spark.components.NumericStepper" min="-1000" max="1000" inc="1" init="0" copyable="true"/>
+			<property path="max" dataType="Number" input="spark.components.NumericStepper" min="-1000" max="1000" inc="1" init="0" copyable="true"/>
+			<property path="splitNumber" dataType="Number" input="spark.components.NumericStepper" min="1" max="100" inc="1" init="10" copyable="true"/>
+			<property path="progress" dataType="JSON" input="JsonInput" copyable="true"/>
+			<property path="axisLine" dataType="JSON" input="JsonInput" copyable="true"/>
+			<property path="axisLabel" dataType="JSON" input="JsonInput" copyable="true"/>
+			<property path="axisTick" dataType="JSON" input="JsonInput" copyable="true"/>
+			<property path="splitLine" dataType="JSON" input="JsonInput" copyable="true"/>				
+			<property path="pointer" dataType="JSON" input="JsonInput" copyable="true"/>
+			<property path="anchor" dataType="JSON" input="JsonInput" copyable="true"/>
+			<property path="detail" dataType="JSON" input="JsonInput" copyable="true"/>
+		</type>
+
+		<type name="Style" @stopCommit="true">
+ 			<property path="backgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+ 			<property path="backgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+ 			<property path="borderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+ 			<property path="borderColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+ 			<property path="borderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" copyable="true"/>
+			<property path="boxShadow" dataType="Boolean" input="spark.components.CheckBox" value="false" disable="true">
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[boxShadow]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[boxShadowWidth]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[boxShadowWidth]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[boxShadowColor]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[boxShadowColor]:}" method="folded" value="true" caseOf="false"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property path="boxShadowWidth" input="spark.components.NumericStepper" min="0" max="10" inc="1" disable="true"/>
+			<property path="boxShadowColor" dataType="ColorDic" input="mx.controls.ColorPicker" disable="true"/>
+		</type>
+		
+		<type name="Padding" @stopCommit="true">
+			<property path="padding.top" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+			<property path="padding.left" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+			<property path="padding.right" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+			<property path="padding.bottom" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+		</type>
+		<type name="Geometry" @stopCommit="true">
+			<property path="frame.x" dataType="Number" input="spark.components.NumericStepper" min="0" max="10000" copyable="true"/>
+			<property path="frame.y" dataType="Number" input="spark.components.NumericStepper" min="0" max="10000" copyable="true"/>
+			<property path="frame.width" dataType="Number" input="spark.components.NumericStepper" min="240" max="10000" init="300" copyable="true"/>
+			<property path="frame.height" dataType="Number" input="spark.components.NumericStepper" min="150" max="10000" init="240" copyable="true"/>
+		</type> 
+	</properties>
+</item>

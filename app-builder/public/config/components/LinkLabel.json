@@ -1,0 +1,721 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "LinkLabel",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_linklabel.png",
+      "description": "Here is the label description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "fieldname": {
+            "input": "DropDownList123",
+            "dataSource": [],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "@dbTable:",
+                  "compareBy": "IS_NULL_OR_EMPTY",
+                  "at": [
+                    "initForm"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[fieldname]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[fieldname]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[fieldname]:}",
+                    "method": "setOptions",
+                    "value": "@dbTable:fieldswithBracket",
+                    "case": "false"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[fieldname]:value}",
+                  "compareBy": "IS_NULL_OR_EMPTY",
+                  "at": [
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[text]:}",
+                    "method": "setValue",
+                    "value": "{@form[fieldname]:value}",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "text": {
+            "input": "TextInput",
+            "copyable": true
+          },
+          "displayFormat": {
+            "input": "DropDownList",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": ""
+              },
+              {
+                "name": "DateTime"
+              },
+              {
+                "name": "Number"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[displayFormat]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[dateFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[dateDataType]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[customDateFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[numberDataType]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[_numberFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[numDisplayFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[displayFormat]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "DateTime",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[dateFormat]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[numberDataType]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[_numberFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[numDisplayFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[displayFormat]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Number",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[dateFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[dateDataType]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[customDateFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[numberDataType]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[_numberFormat]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "dateFormat": {
+            "input": "InputFormatForm",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[displayFormat]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "DateTime",
+                  "at": [
+                    "initForm"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[dateFormat]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[dateFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[dateFormat]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Custom",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[dateDataType]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[dateDataType]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[customDateFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "dateDataType": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "date"
+              },
+              {
+                "name": "datetime"
+              },
+              {
+                "name": "time"
+              },
+              {
+                "name": "timestamp"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[dateDataType]:value}",
+                  "compareBy": "NE",
+                  "compareWith": "",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[dateDataType]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[customDateFormat]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[customDateFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "customDateFormat": {
+            "input": "TextInput",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[dateDataType]:value}",
+                  "compareBy": "NE",
+                  "compareWith": "",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[customDateFormat]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[customDateFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "numberDataType": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "boolean"
+              },
+              {
+                "name": "double"
+              },
+              {
+                "name": "integer"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[numberDataType]:value}",
+                  "compareBy": "NE",
+                  "compareWith": "",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[_numberFormat]:}",
+                    "method": "setOptions",
+                    "value": "{@form[_numberFormat]:getNumberFormatValue(@form[numberDataType]:value)}",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[_numberFormat]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[numberDataType]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "boolean",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[numDisplayFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[numberDataType]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "double",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "method": "dependentConditions",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[numberDataType]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "integer",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "method": "dependentConditions",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "_numberFormat": {
+            "input": "InputFormatForm",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[numberDataType]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "double",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "method": "dependentConditions",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[numberDataType]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "integer",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "method": "dependentConditions",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "numDisplayFormat": {
+            "input": "TextInput",
+            "copyable": true
+          },
+          "link": {
+            "input": "TextInput",
+            "copyable": true
+          },
+          "option": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "2",
+            "copyable": true
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "borderWeight": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "10",
+            "copyable": true
+          },
+          "borderColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "borderColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          }
+        }
+      },
+      "TextFont": {
+        "properties": {
+          "font.fontName": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "system",
+            "copyable": true,
+            "dataSource": []
+          },
+          "font.fontSize": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "14",
+            "min": "6",
+            "max": "100",
+            "copyable": true
+          },
+          "underline": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "strikeout": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "font.textColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "font.textAlignment": {
+            "input": "RadioButton",
+            "dataType": "custom",
+            "init": "left",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "left"
+              },
+              {
+                "name": "center"
+              },
+              {
+                "name": "right"
+              }
+            ]
+          },
+          "verticalAlignment": {
+            "input": "RadioButton",
+            "dataType": "custom",
+            "init": "middle",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "top"
+              },
+              {
+                "name": "middle"
+              },
+              {
+                "name": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "TextPadding": {
+        "properties": {
+          "padding.top": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.left": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.right": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.bottom": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "88",
+            "min": "5",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "44",
+            "min": "5",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.rotation": {
+            "input": "NumericStepper",
+            "min": "0",
+            "max": "360",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

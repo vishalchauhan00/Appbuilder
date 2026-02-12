@@ -1,0 +1,443 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "ActionButton",
+      "visible": true,
+      "imagePath": "",
+      "description": ""
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "tooltip": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "floating": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "disable": true
+          },
+          "variant": {
+            "input": "DropDownList",
+            "init": "",
+            "disable": true,
+            "dataSource": [
+              {
+                "name": ""
+              },
+              {
+                "name": "extended"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[variant]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "extended",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[title]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[title]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[iconPosition]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[iconPosition]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[normalFont.fontName]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[normalFont.fontName]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[normalFont.fontSize]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[normalFont.fontSize]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[normalFont.fontWeight]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[normalFont.fontWeight]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[normalFont.fontStyle]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[normalFont.fontStyle]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[normalFont.textColor]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[normalFont.textColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[normalFont.textAlignment]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[normalFont.textAlignment]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[verticalAlignment]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[verticalAlignment]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[frame.width]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[frame.width]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "title": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "iconPosition": {
+            "input": "DropDownList",
+            "init": "start",
+            "dataSource": [
+              {
+                "name": "start"
+              },
+              {
+                "name": "end"
+              }
+            ]
+          },
+          "iconType": {
+            "input": "DropDownList",
+            "init": "add",
+            "dataSource": [
+              {
+                "name": "add"
+              },
+              {
+                "name": "back"
+              },
+              {
+                "name": "bookmark"
+              },
+              {
+                "name": "camera"
+              },
+              {
+                "name": "compose"
+              },
+              {
+                "name": "fast-forward"
+              },
+              {
+                "name": "organize"
+              },
+              {
+                "name": "pause"
+              },
+              {
+                "name": "play"
+              },
+              {
+                "name": "refresh"
+              },
+              {
+                "name": "reply"
+              },
+              {
+                "name": "rewind"
+              },
+              {
+                "name": "search"
+              },
+              {
+                "name": "settings"
+              },
+              {
+                "name": "stop"
+              },
+              {
+                "name": "trash"
+              },
+              {
+                "name": "custom"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[iconType]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "custom",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[customImage]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[customImage]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "customImage": {
+            "input": "TextInputWithButton",
+            "copyable": true
+          },
+          "size": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "medium",
+            "dataSource": [
+              {
+                "name": "small"
+              },
+              {
+                "name": "medium"
+              },
+              {
+                "name": "large"
+              },
+              {
+                "name": "xlarge"
+              }
+            ]
+          },
+          "showElevation": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "copyable": true
+          },
+          "enableRipple": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "copyable": true
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          }
+        }
+      },
+      "normalFont": {
+        "properties": {
+          "normalFont.fontName": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "system",
+            "copyable": true,
+            "dataSource": []
+          },
+          "normalFont.fontSize": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "14",
+            "min": "6",
+            "max": "100",
+            "copyable": true
+          },
+          "normalFont.fontWeight": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "normalFont.fontStyle": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "normalFont.textColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "normalFont.textAlignment": {
+            "input": "RadioButton",
+            "dataType": "custom",
+            "init": "center",
+            "disable": true,
+            "dataSource": [
+              {
+                "name": "left"
+              },
+              {
+                "name": "center"
+              },
+              {
+                "name": "right"
+              }
+            ]
+          },
+          "verticalAlignment": {
+            "input": "RadioButton",
+            "dataType": "custom",
+            "init": "middle",
+            "disable": true,
+            "dataSource": [
+              {
+                "name": "top"
+              },
+              {
+                "name": "middle"
+              },
+              {
+                "name": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "Actions": {
+        "properties": {
+          "actions.clicked": {
+            "input": "LabelWithButton"
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "100",
+            "min": "100",
+            "max": "2000",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="ChatBot" visible="true" visibleInTableView="true" imagePath="assets/toolbox/ico_header.png" description="Here is the label description"
+		helpLink_EN="/" helpLink_JP="/">
+	<properties>
+		<type name="Type" @stopCommit="true">
+			<property path="name" input="spark.components.TextInput">
+				<validations>
+					<validation validator="UniqUINameValidator">
+						<args>
+							<arg property="currentSettings" value="{@currentSettings:}"/>
+							<arg property="pageContainerDic" value="{@page:}"/>
+							<arg property="uiPartDic" value="{@base:}"/>
+							<arg property="tableViewCellDic" value="{@tableviewCell:}"/>
+							<arg property="toolbarUiDic" value="{@toolbarUiDic:}"/>
+						</args>
+					</validation>
+				</validations>
+			</property>
+			<property path="hidden" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property path="chatapiURL" input="spark.components.TextInput" copyable="true"/>
+			<property path="botAvatar" input="TextInputWithButton" copyable="true"/>
+			<property path="userAvatar.filename" input="spark.components.TextInput" copyable="true"/>
+			<property path="prompt" input="spark.components.TextInput" copyable="true"/>
+			<property path="onInitMessage" input="spark.components.TextArea" copyable="true"/>
+			<property path="sendIcon" input="TextInputWithButton" copyable="true"/>
+			<property path="supportVoiceInput" dataType="Boolean" input="spark.components.CheckBox" value="true" copyable="true" >
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[supportVoiceInput]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[micIcon]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[micIcon]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[voiceInputIcon]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[voiceInputIcon]:}" method="folded" value="true" caseOf="false"/>	
+						<action target="{@form[voiceInputAnimation]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[voiceInputAnimation]:}" method="folded" value="true" caseOf="false"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property path="micIcon" input="TextInputWithButton" copyable="true"/>
+			<property path="voiceInputIcon" input="TextInputWithButton" copyable="true"/>
+			<property path="voiceInputAnimation" input="TextInputWithButton" copyable="true"/>
+			<property path="supportAttachments" dataType="Boolean" input="spark.components.CheckBox" value="true" copyable="true" >
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[supportAttachments]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[attachmentsType]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[attachmentsType]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[attachmentIcon]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[attachmentIcon]:}" method="folded" value="true" caseOf="false"/>	
+						<action target="{@form[attachmentIconPosition]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[attachmentIconPosition]:}" method="folded" value="true" caseOf="false"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property path="attachmentsType" input="ListWithCheckBox" mandatoryCount="1">
+				<dataSource labelField="name" valueField="value">
+					<data name="media" value="1"/>
+					<data name="file" value="0"/>
+					<data name="location" value="0"/>
+				</dataSource>
+			</property>
+			<property path="attachmentIcon" input="TextInputWithButton" copyable="true"/>			
+			<property path="attachmentIconPosition" input="spark.components.DropDownList" dataType="array" init="right" copyable="true" > 
+				<dataSource>
+					<data name="left" />
+					<data name="right" />
+				</dataSource>
+			</property>
+		</type>
+		<type name="Style" @stopCommit="true">
+			<property path="backgroundGradient" dataType="String" input="spark.components.TextInput"/>
+			<property path="backgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="backgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="borderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="borderColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="borderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" init="0" copyable="true"/>
+			<property path="cornerRadius" dataType="Number" input="spark.components.NumericStepper" min="0" max="25" inc="1" init="0" copyable="true"/>
+		</type>		
+		<type name="ChatInputStyle">
+			<property path="chatInputfont.fontName" input="spark.components.DropDownList" dataType="array" init="system" copyable="true">
+				<dataSource source="{@base:getFontNames()}" />
+			</property>
+			<property path="chatInputfont.fontSize" dataType="Number" input="spark.components.NumericStepper" min="6" max="100" inc="1" init="14" copyable="true"/>
+			<property path="chatInputfont.textColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="chatInputfont.fontWeightNum" dataType="Number" input="spark.components.DropDownList" init="400" copyable="true">
+				<dataSource>
+					<data name="100" />
+					<data name="200" />
+					<data name="300" />
+					<data name="400" />
+					<data name="500" />
+					<data name="600" />
+					<data name="700" />
+					<data name="800" />
+					<data name="900" />
+				</dataSource>
+			</property>
+			<property path="chatInputbackgroundGradient" dataType="String" input="spark.components.TextInput"/>
+			<property path="chatInputbackgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="chatInputbackgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="chatInputborderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="chatInputborderColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" disable="true"/>
+			<property path="chatInputborderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" init="0" copyable="true"/>
+			<property path="chatInputcornerRadius" dataType="Number" input="spark.components.NumericStepper" min="0" max="25" inc="1" init="0" copyable="true"/>
+			<property path="chatInputboxShadow" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true">
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[chatInputboxShadow]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[chatInputboxShadowWidth]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[chatInputboxShadowWidth]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[chatInputboxShadowColor]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[chatInputboxShadowColor]:}" method="folded" value="true" caseOf="false"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property path="chatInputboxShadowWidth" input="spark.components.NumericStepper" min="0" max="10" inc="1" copyable="true"/>
+			<property path="chatInputboxShadowColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="chatInputfocusBackgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="chatInputfocusBorderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+		</type>
+		<type name="BubbleStyle" @stopCommit="true">
+			<property path="bubbleAlign" input="spark.components.DropDownList" dataType="array" init="start" copyable="true" > 
+				<dataSource>
+					<data name="start" />
+					<data name="center" />
+					<data name="end" />
+				</dataSource>
+			</property>
+			<property path="bubbleMaxWidth" input="spark.components.NumericStepper" min="50" max="100" inc="1" copyable="true"/>
+			<property path="bubbleShowTail" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true">
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[bubbleShowTail]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[bubbleTailPosition]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[bubbleTailPosition]:}" method="folded" value="true" caseOf="false"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property path="bubblefont.fontName" input="spark.components.DropDownList" dataType="array" init="system" copyable="true">
+				<dataSource source="{@base:getFontNames()}" />
+			</property>
+			<property path="bubblefont.fontSize" dataType="Number" input="spark.components.NumericStepper" min="6" max="100" inc="1" init="14" copyable="true">
+			</property>
+			<property path="bubblefont.textColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="botBubblebackgroundGradient" dataType="String" input="spark.components.TextInput"/>
+			<property path="botBubblebackgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="botBubblebackgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="botBubbleborderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="botBubbleborderColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" disable="true"/>
+			<property path="botBubbleborderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" init="0" copyable="true"/>
+			<property path="botBubblecornerRadius" dataType="Number" input="spark.components.NumericStepper" min="0" max="25" inc="1" init="0" copyable="true"/>
+			<property path="botBubbleboxShadow" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true">
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[botBubbleboxShadow]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[botBubbleboxShadowWidth]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[botBubbleboxShadowWidth]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[botBubbleboxShadowColor]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[botBubbleboxShadowColor]:}" method="folded" value="true" caseOf="false"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property path="botBubbleboxShadowWidth" input="spark.components.NumericStepper" min="0" max="10" inc="1" copyable="true"/>
+			<property path="botBubbleboxShadowColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="userBubblebackgroundGradient" dataType="String" input="spark.components.TextInput"/>
+			<property path="userBubblebackgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="userBubblebackgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="userBubbleborderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="userBubbleborderColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" disable="true"/>
+			<property path="userBubbleborderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" init="0" copyable="true"/>
+			<property path="userBubblecornerRadius" dataType="Number" input="spark.components.NumericStepper" min="0" max="25" inc="1" init="0" copyable="true"/>
+			<property path="userBubbleboxShadow" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true">
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[userBubbleboxShadow]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[userBubbleboxShadowWidth]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[userBubbleboxShadowWidth]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[userBubbleboxShadowColor]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[userBubbleboxShadowColor]:}" method="folded" value="true" caseOf="false"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property path="userBubbleboxShadowWidth" input="spark.components.NumericStepper" min="0" max="10" inc="1" copyable="true"/>
+			<property path="userBubbleboxShadowColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>			
+		</type>
+		<type name="ChatButtonStyle">
+			<property path="chatButtonfont.fontName" input="spark.components.DropDownList" dataType="array" init="system" copyable="true">
+				<dataSource source="{@base:getFontNames()}" />
+			</property>
+			<property path="chatButtonfont.fontSize" dataType="Number" input="spark.components.NumericStepper" min="6" max="100" inc="1" init="14" copyable="true">
+			</property>
+			<property path="chatButtonfont.fontWeightNum" dataType="Number" input="spark.components.DropDownList" init="400" copyable="true">
+				<dataSource>
+					<data name="100" />
+					<data name="200" />
+					<data name="300" />
+					<data name="400" />
+					<data name="500" />
+					<data name="600" />
+					<data name="700" />
+					<data name="800" />
+					<data name="900" />
+				</dataSource>
+			</property>
+			<property path="chatButtonfont.fontStyle" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property path="chatButtonfont.textColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="chatButtonfont.textAlignment" dataType="custom" input="spark.components.RadioButton" init="left" copyable="true">
+				<dataSource>
+					<data name="left" path="left"/>
+					<data name="center" path="center"/>
+					<data name="right" path="right"/>
+				</dataSource>
+			</property>
+			<property path="chatButtonbackgroundGradient" dataType="String" input="spark.components.TextInput"/>
+			<property path="chatButtonbackgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="chatButtonbackgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="chatButtonborderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="chatButtonborderColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" disable="true"/>
+			<property path="chatButtonborderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" init="0" copyable="true"/>
+			<property path="chatButtoncornerRadius" dataType="Number" input="spark.components.NumericStepper" min="0" max="25" inc="1" init="0" copyable="true"/>
+		</type>
+		<type name="Padding" @stopCommit="true">
+			<property path="padding.top" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+			<property path="padding.left" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+			<property path="padding.right" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+			<property path="padding.bottom" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+		</type>
+		<type name="Geometry" @stopCommit="true">
+			<property path="frame.x" dataType="Number" input="spark.components.NumericStepper" min="0" max="10000" copyable="true"/>
+			<property path="frame.y" dataType="Number" input="spark.components.NumericStepper" min="0" max="10000" copyable="true"/>
+			<property path="frame.width" dataType="Number" input="spark.components.NumericStepper" min="10" max="10000" init="88" copyable="true"/>
+			<property path="frame.height" dataType="Number" input="spark.components.NumericStepper" min="5" max="10000" init="44" copyable="true"/>
+			<property path="frame.rotation" input="spark.components.NumericStepper" min="0" max="360" inc="5" copyable="true" disable="true"/>
+		</type> 
+	</properties>
+</item>

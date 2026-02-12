@@ -1,0 +1,268 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "DatePicker",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_pickerdate.png",
+      "description": "Here is the label description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "fieldname": {
+            "input": "DropDownList123",
+            "dataSource": [],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "@dbTable:",
+                  "compareBy": "IS_NULL_OR_EMPTY",
+                  "at": [
+                    "initForm"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[fieldname]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[fieldname]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[fieldname]:}",
+                    "method": "setOptions",
+                    "value": "@dbTable:fieldswithBracket",
+                    "case": "false"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[fieldname]:value}",
+                  "compareBy": "IS_NULL_OR_EMPTY",
+                  "at": [
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[currentDate]:}",
+                    "method": "setValue",
+                    "value": "{@form[fieldname]:value}",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "mode": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "Time",
+            "disable": true,
+            "dataSource": [
+              {
+                "name": "Time"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[mode]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Date",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[currentDate]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[currentTime]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[currentDateTime]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[timeFormat]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[mode]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Time",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[currentTime]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[currentDate]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[currentDateTime]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[timeFormat]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[mode]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "DateAndTime",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[currentDateTime]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[currentTime]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[currentDate]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[timeFormat]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "timeFormat": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "24 Hour",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "12 Hour"
+              },
+              {
+                "name": "24 Hour"
+              }
+            ]
+          },
+          "currentDate": {
+            "input": "DateFieldEditor",
+            "copyable": true
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Actions": {
+        "properties": {
+          "actions.valueChanged": {
+            "input": "LabelWithButton"
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "disable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "disable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "250",
+            "min": "250",
+            "max": "400",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "400",
+            "min": "400",
+            "max": "400",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<server>instance.mobilous.com</server>
+	<port>443</port>
+	<version>5.0</version>
+	<platform>html</platform>
+	<revision/>
+	<partner>mobilous</partner>
+	<console>stagemultiuser.mobilous.com</console>
+</project>

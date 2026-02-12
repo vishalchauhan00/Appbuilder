@@ -1,0 +1,171 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "GoogleSignIn",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_map.png",
+      "description": "Here is the label description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "clientId": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "secret": {
+            "input": "TextInput",
+            "dataType": "String",
+            "disable": true
+          },
+          "theme": {
+            "input": "DropDownList",
+            "init": "Neutral",
+            "disable": true,
+            "dataSource": [
+              {
+                "name": "Neutral"
+              },
+              {
+                "name": "Light"
+              },
+              {
+                "name": "Dark"
+              }
+            ]
+          },
+          "style": {
+            "input": "DropDownList",
+            "init": "Standard",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "Standard"
+              },
+              {
+                "name": "Icon"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[style]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Standard",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[text]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[text]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "text": {
+            "input": "DropDownList",
+            "init": "Sign in",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "Sign in"
+              },
+              {
+                "name": "Sign in with Google"
+              },
+              {
+                "name": "Sign up with Google"
+              },
+              {
+                "name": "Continue with Google"
+              }
+            ]
+          },
+          "shape": {
+            "input": "DropDownList",
+            "init": "Rectangular",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "Rectangular"
+              },
+              {
+                "name": "Round"
+              }
+            ]
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Actions": {
+        "properties": {
+          "actions.onAuthSuccess": {
+            "input": "LabelWithButton"
+          },
+          "actions.onAuthError": {
+            "input": "LabelWithButton"
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "183",
+            "min": "40",
+            "max": "200",
+            "disable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "40",
+            "min": "40",
+            "max": "40",
+            "disable": true
+          }
+        }
+      }
+    }
+  }
+}

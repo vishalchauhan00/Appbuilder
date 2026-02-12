@@ -1,0 +1,375 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "Avatar",
+      "visible": true,
+      "imagePath": "",
+      "description": ""
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "variant": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "rounded",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "rounded"
+              },
+              {
+                "name": "square"
+              }
+            ]
+          },
+          "size": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "medium",
+            "dataSource": [
+              {
+                "name": "small"
+              },
+              {
+                "name": "medium"
+              },
+              {
+                "name": "large"
+              },
+              {
+                "name": "xlarge"
+              }
+            ]
+          },
+          "type": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "Letter",
+            "dataSource": [
+              {
+                "name": "Letter"
+              },
+              {
+                "name": "Icon"
+              },
+              {
+                "name": "Image"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[type]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Letter",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[avatarTxt]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[avatarSrc]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[avatarImg.srcLocation]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[bundleImage]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[urlImage]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[remoteImage]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[type]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Icon",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[avatarTxt]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[avatarSrc]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[avatarImg.srcLocation]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[bundleImage]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[urlImage]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[remoteImage]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[type]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "Image",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[avatarTxt]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[avatarSrc]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[avatarImg.srcLocation]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "method": "dependentConditions",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "avatarTxt": {
+            "input": "TextInput",
+            "copyable": true
+          },
+          "avatarSrc": {
+            "input": "TextInputWithButton",
+            "copyable": true
+          },
+          "avatarImg.srcLocation": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "url",
+            "dataSource": [
+              {
+                "name": "remoteFile"
+              },
+              {
+                "name": "url"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[avatarImg.srcLocation]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "url",
+                  "at": [
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[urlImage]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[remoteImage]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[avatarImg.srcLocation]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "remoteFile",
+                  "at": [
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[urlImage]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[remoteImage]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "avatarImg": {
+            "input": "TextInputWithButton",
+            "disable": true
+          },
+          "avatarImg.imageName": {
+            "input": "TextInput",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[urlImage]:}",
+                    "method": "setValue",
+                    "value": "{@base:avatarImg.imageName}"
+                  }
+                ]
+              }
+            ]
+          },
+          "avatarImg.filename": {
+            "input": "TextInput",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[remoteImage]:}",
+                    "method": "setValue",
+                    "value": "{@base:avatarImg.filename}"
+                  }
+                ]
+              }
+            ]
+          },
+          "altText": {
+            "input": "TextInput",
+            "disable": true
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.rotation": {
+            "input": "NumericStepper",
+            "min": "0",
+            "max": "360",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

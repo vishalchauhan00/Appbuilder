@@ -1,0 +1,479 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "FormView",
+      "visible": true,
+      "imagePath": "",
+      "description": ""
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "heading": {
+            "input": "TextInput"
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "backgroundGradient": {
+            "input": "TextInput",
+            "dataType": "String"
+          },
+          "backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "borderColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "borderColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "borderWeight": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "10",
+            "copyable": true
+          },
+          "cornerRadius": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "25",
+            "copyable": true
+          },
+          "boxShadow": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[boxShadow]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "1",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[boxShadowWidth]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[boxShadowWidth]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[boxShadowColor]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[boxShadowColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "boxShadowWidth": {
+            "input": "NumericStepper",
+            "min": "0",
+            "max": "10",
+            "copyable": true
+          },
+          "boxShadowColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          }
+        }
+      },
+      "FormContent": {
+        "properties": {
+          "formItems[0].gap": {
+            "input": "NumericStepper",
+            "init": "5",
+            "min": "1",
+            "max": "10000",
+            "copyable": true
+          },
+          "formItems": {
+            "input": "List",
+            "copyable": true
+          },
+          "formItems[*].label": {
+            "input": "TextInput"
+          },
+          "formItems[*]": {
+            "input": "LabelWithButton",
+            "popup": "CellEditor",
+            "source": "Form",
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "preCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[formItems[*].Fields]:}",
+                    "method": "{@base:notifyChange()}"
+                  }
+                ]
+              }
+            ]
+          },
+          "formItems[*].required": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "formItems[*].height": {
+            "input": "NumericStepper",
+            "init": "100",
+            "min": "40",
+            "max": "1000",
+            "copyable": true
+          },
+          "columns": {
+            "input": "List",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "initForm",
+                    " postIndexChange"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[columns[*].width]:}",
+                    "method": "setValue",
+                    "value": "{@base:columns[@form[columns]:selectedIndex].width}"
+                  },
+                  {
+                    "target": "{@form[columns[*].width]:}",
+                    "method": "setPath",
+                    "value": "{\"columns[\" + @form[columns]:selectedIndex + \"].width\"}"
+                  }
+                ]
+              }
+            ]
+          },
+          "columns[*].width": {
+            "input": "NumericStepper",
+            "init": "1",
+            "min": "0.5",
+            "max": "10",
+            "copyable": true
+          }
+        }
+      },
+      "HeaderStyle": {
+        "properties": {
+          "headerfont.fontName": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "system",
+            "copyable": true,
+            "dataSource": []
+          },
+          "headerfont.fontSize": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "14",
+            "min": "6",
+            "max": "100",
+            "copyable": true
+          },
+          "headerfont.fontWeight": {
+            "input": "DropDownList",
+            "dataType": "Number",
+            "init": "400",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "100"
+              },
+              {
+                "name": "200"
+              },
+              {
+                "name": "300"
+              },
+              {
+                "name": "400"
+              },
+              {
+                "name": "500"
+              },
+              {
+                "name": "600"
+              },
+              {
+                "name": "700"
+              },
+              {
+                "name": "800"
+              },
+              {
+                "name": "900"
+              }
+            ]
+          },
+          "headerfont.fontStyle": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "headerfont.textColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "headerfont.textAlignment": {
+            "input": "RadioButton",
+            "dataType": "custom",
+            "init": "left",
+            "disable": true,
+            "dataSource": [
+              {
+                "name": "left"
+              },
+              {
+                "name": "center"
+              },
+              {
+                "name": "right"
+              }
+            ]
+          }
+        }
+      },
+      "itemStyle": {
+        "properties": {
+          "itembackgroundGradient": {
+            "input": "TextInput",
+            "dataType": "String"
+          },
+          "itembackgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "itembackgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "itemborderWeight": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "10",
+            "copyable": true
+          },
+          "itemborderColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "itemborderColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "itemcornerRadius": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "25",
+            "copyable": true
+          },
+          "itemfont.fontName": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "system",
+            "copyable": true,
+            "dataSource": []
+          },
+          "itemfont.fontSize": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "14",
+            "min": "6",
+            "max": "100",
+            "copyable": true
+          },
+          "itemfont.fontWeight": {
+            "input": "DropDownList",
+            "dataType": "Number",
+            "init": "400",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "100"
+              },
+              {
+                "name": "200"
+              },
+              {
+                "name": "300"
+              },
+              {
+                "name": "400"
+              },
+              {
+                "name": "500"
+              },
+              {
+                "name": "600"
+              },
+              {
+                "name": "700"
+              },
+              {
+                "name": "800"
+              },
+              {
+                "name": "900"
+              }
+            ]
+          },
+          "itemfont.fontStyle": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "itemfont.textColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "itemfont.textAlignment": {
+            "input": "RadioButton",
+            "dataType": "custom",
+            "init": "left",
+            "disable": true,
+            "dataSource": [
+              {
+                "name": "left"
+              },
+              {
+                "name": "center"
+              },
+              {
+                "name": "right"
+              }
+            ]
+          }
+        }
+      },
+      "Padding": {
+        "properties": {
+          "padding.top": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "10",
+            "min": "1",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.left": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "10",
+            "min": "1",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.right": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "10",
+            "min": "1",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.bottom": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "10",
+            "min": "1",
+            "max": "100",
+            "copyable": true
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "44",
+            "min": "20",
+            "max": "10000",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,882 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "ScrollView",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_notExist.png",
+      "description": "Here is the BaseView description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "Title": {
+            "input": "TextInput",
+            "validators": [
+              "RequiredValueValidator",
+              "UniqPageTitleValidator"
+            ]
+          },
+          "moduleName": {
+            "input": "TextInput",
+            "dataType": "String"
+          },
+          "srcLocation": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "bundle",
+            "disable": true,
+            "dataSource": [
+              {
+                "name": "bundle"
+              },
+              {
+                "name": "remoteFile"
+              }
+            ]
+          },
+          "displayType": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "default",
+            "disable": true,
+            "dataSource": [
+              {
+                "name": "default"
+              },
+              {
+                "name": "flex"
+              }
+            ]
+          },
+          "wireframe": {
+            "input": "TextInputWithButton",
+            "disable": true
+          },
+          "wireframeUnvisible": {
+            "input": "CheckBox",
+            "init": "0",
+            "disable": true
+          },
+          "zoomEnabled": {
+            "input": "CheckBox",
+            "init": "1"
+          },
+          "Children": [
+            {
+              "frame.x": {
+                "input": "NumericStepper",
+                "init": "0",
+                "min": "-1000",
+                "max": "10000",
+                "copyable": true
+              },
+              "frame.y": {
+                "input": "NumericStepper",
+                "init": "0",
+                "min": "-1000",
+                "max": "10000",
+                "copyable": true
+              },
+              "frame.width": {
+                "input": "NumericStepper",
+                "min": "320",
+                "max": "10000",
+                "copyable": true
+              },
+              "frame.height": {
+                "input": "NumericStepper",
+                "min": "480",
+                "max": "10000",
+                "copyable": true
+              },
+              "backgroundColor": {
+                "input": "ColorPicker",
+                "dataType": "ColorDic",
+                "init": "0"
+              },
+              "backgroundGradient": {
+                "input": "TextInput",
+                "dataType": "String"
+              },
+              "showScrollButtons": {
+                "input": "CheckBox",
+                "init": "1",
+                "disable": true,
+                "dependentActions": [
+                  {
+                    "condition": {
+                      "type": "compare",
+                      "target": "{@form[Children[0].showScrollButtons]:value}",
+                      "compareBy": "EQ",
+                      "compareWith": "0",
+                      "at": [
+                        "initForm",
+                        " postCommit"
+                      ]
+                    },
+                    "actions": [
+                      {
+                        "target": "{@form[Children[0].scrollButtonsBGColor]:}",
+                        "method": "folded",
+                        "value": "true",
+                        "case": "true"
+                      },
+                      {
+                        "target": "{@form[Children[0].scrollButtonsTextColor]:}",
+                        "method": "folded",
+                        "value": "true",
+                        "case": "true"
+                      },
+                      {
+                        "target": "{@form[Children[0].scrollButtonTitleBelow]:}",
+                        "method": "folded",
+                        "value": "true",
+                        "case": "true"
+                      },
+                      {
+                        "target": "{@form[Children[0].scrollButtonTitleTop]:}",
+                        "method": "folded",
+                        "value": "true",
+                        "case": "true"
+                      },
+                      {
+                        "target": "{@form[Children[0].scrollButtonsBGColor]:}",
+                        "method": "folded",
+                        "value": "false",
+                        "case": "false"
+                      },
+                      {
+                        "target": "{@form[Children[0].scrollButtonsTextColor]:}",
+                        "method": "folded",
+                        "value": "false",
+                        "case": "false"
+                      },
+                      {
+                        "target": "{@form[Children[0].scrollButtonTitleBelow]:}",
+                        "method": "folded",
+                        "value": "false",
+                        "case": "false"
+                      },
+                      {
+                        "target": "{@form[Children[0].scrollButtonTitleTop]:}",
+                        "method": "folded",
+                        "value": "false",
+                        "case": "false"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "scrollButtonsBGColor": {
+                "input": "ColorPicker",
+                "dataType": "ColorDic",
+                "init": "0"
+              },
+              "scrollButtonsTextColor": {
+                "input": "ColorPicker",
+                "dataType": "ColorDic",
+                "init": "1"
+              },
+              "scrollButtonTitleBelow": {
+                "input": "TextInput",
+                "dataType": "String"
+              },
+              "scrollButtonTitleTop": {
+                "input": "TextInput",
+                "dataType": "String"
+              }
+            }
+          ]
+        }
+      },
+      "ToolBarTop": {
+        "properties": {
+          "toolBarTop.hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "0",
+            "enabled": true,
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolBarTop.hidden]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "0",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolBarTop.frame.height]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarTop.frame.height]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarTop.backgroundColor]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarTop.backgroundColor]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarTop.backgroundGradient]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarTop.backgroundGradient]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarTop.Children]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarTop.Children]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "toolBarTop.frame.height": {
+            "input": "NumericStepper",
+            "init": "40",
+            "min": "10",
+            "max": "1000",
+            "copyable": true
+          },
+          "toolBarTop.backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "init": "0"
+          },
+          "toolBarTop.backgroundGradient": {
+            "input": "TextInput",
+            "dataType": "String"
+          },
+          "toolBarTop.Children": {
+            "input": "LabelWithButton",
+            "popup": "ToolBarEditor"
+          }
+        }
+      },
+      "ToolBarBottom": {
+        "properties": {
+          "toolBarBottom.hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "init": "",
+            "value": "0",
+            "enabled": true,
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolBarBottom.hidden]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "0",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolBarBottom.frame.height]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarBottom.frame.height]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarBottom.backgroundColor]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarBottom.backgroundColor]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarBottom.backgroundGradient]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarBottom.backgroundGradient]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarBottom.Children]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarBottom.Children]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "toolBarBottom.frame.height": {
+            "input": "NumericStepper",
+            "init": "40",
+            "min": "10",
+            "max": "1000",
+            "copyable": true
+          },
+          "toolBarBottom.backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "init": "0"
+          },
+          "toolBarBottom.backgroundGradient": {
+            "input": "TextInput",
+            "dataType": "String"
+          },
+          "toolBarBottom.Children": {
+            "input": "LabelWithButton",
+            "popup": "ToolBarEditor"
+          }
+        }
+      },
+      "ToolBarLeft": {
+        "properties": {
+          "toolBarLeft.hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "init": "",
+            "value": "0",
+            "enabled": true,
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolBarLeft.hidden]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "0",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolBarLeft.fixed]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.view]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.frame.width]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.backgroundColor]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.Children]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.fixed]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.view]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.frame.width]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.frame.height]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.backgroundColor]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.backgroundGradient]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.backgroundGradient]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.Children]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.tableData]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "toolBarLeft.fixed": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "init": "",
+            "value": "0",
+            "copyable": true
+          },
+          "toolBarLeft.view": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "FreeLayout",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "FreeLayout"
+              },
+              {
+                "name": "FreeScroll"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolBarLeft.view]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "FreeLayout",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolBarLeft.frame.height]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.tableData]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolBarLeft.view]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "FreeScroll",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolBarLeft.frame.height]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.frame.height]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.tableData]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolBarLeft.view]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "TableView",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolBarLeft.tableData]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.tableData]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarLeft.Children]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "toolBarLeft.frame.width": {
+            "input": "NumericStepper",
+            "init": "240",
+            "min": "50",
+            "max": "1000",
+            "copyable": true
+          },
+          "toolBarLeft.frame.height": {
+            "input": "NumericStepper",
+            "init": "480",
+            "min": "300",
+            "max": "1000",
+            "copyable": true
+          },
+          "toolBarLeft.backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "init": "0"
+          },
+          "toolBarLeft.backgroundGradient": {
+            "input": "TextInput",
+            "dataType": "String"
+          },
+          "toolBarLeft.Children": {
+            "input": "LabelWithButton",
+            "popup": "ToolBarEditor"
+          },
+          "toolBarLeft.tableData": {
+            "input": "LabelWithButton",
+            "popup": "TableViewEditor"
+          }
+        }
+      },
+      "ToolBarRight": {
+        "properties": {
+          "toolBarRight.hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "init": "",
+            "value": "0",
+            "enabled": true,
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolBarRight.hidden]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "0",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolBarRight.fixed]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.view]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.frame.width]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.backgroundColor]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.backgroundGradient]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.Children]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.fixed]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.view]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.frame.width]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.frame.height]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.backgroundColor]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.backgroundGradient]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.Children]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.tableData]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "toolBarRight.fixed": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "init": "",
+            "value": "0",
+            "copyable": true
+          },
+          "toolBarRight.view": {
+            "input": "DropDownList",
+            "init": "FreeLayout",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "FreeLayout"
+              },
+              {
+                "name": "FreeScroll"
+              }
+            ],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolBarRight.view]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "FreeLayout",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolBarRight.frame.height]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.frame.height]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolBarRight.view]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "FreeScroll",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolBarRight.frame.height]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolBarRight.frame.height]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "toolBarRight.frame.width": {
+            "input": "NumericStepper",
+            "init": "240",
+            "min": "50",
+            "max": "1000",
+            "copyable": true
+          },
+          "toolBarRight.frame.height": {
+            "input": "NumericStepper",
+            "init": "480",
+            "min": "300",
+            "max": "1000",
+            "copyable": true
+          },
+          "toolBarRight.backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "init": "0"
+          },
+          "toolBarRight.backgroundGradient": {
+            "input": "TextInput",
+            "dataType": "String"
+          },
+          "toolBarRight.Children": {
+            "input": "LabelWithButton",
+            "popup": "ToolBarEditor"
+          }
+        }
+      },
+      "PageOverlay": {
+        "properties": {
+          "pageOverlay.Children": {
+            "input": "LabelWithButton",
+            "popup": "ToolBarEditor",
+            "source": "overlay"
+          }
+        }
+      },
+      "Actions": {
+        "properties": {
+          "actions.swipeLR": {
+            "input": "LabelWithButton"
+          },
+          "actions.swipeRL": {
+            "input": "LabelWithButton"
+          },
+          "actions.beforeViewPage": {
+            "input": "LabelWithButton"
+          },
+          "actions.afterViewPage": {
+            "input": "LabelWithButton"
+          },
+          "actions.becameAwake": {
+            "input": "LabelWithButton"
+          }
+        }
+      }
+    }
+  }
+}

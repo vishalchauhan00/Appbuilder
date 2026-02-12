@@ -1,0 +1,466 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "TextEditor",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_textview.png",
+      "description": ""
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "text": {
+            "input": "TextArea",
+            "dataType": "String",
+            "disable": true
+          },
+          "placeholder": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "setInputlabel": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "disable": true
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "taborder": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "1000",
+            "copyable": true
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "placeholderColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "borderWeight": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "1",
+            "min": "0",
+            "max": "10",
+            "copyable": true
+          },
+          "borderColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "borderColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "cornerRadius": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "25",
+            "copyable": true
+          },
+          "onfocusBackgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "disable": true
+          },
+          "onfocusBorderColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "boxShadow": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[boxShadow]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "1",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[boxShadowWidth]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[boxShadowWidth]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[boxShadowColor]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[boxShadowColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "boxShadowWidth": {
+            "input": "NumericStepper",
+            "min": "0",
+            "max": "10",
+            "copyable": true
+          },
+          "boxShadowColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          }
+        }
+      },
+      "toolbar": {
+        "properties": {
+          "showtoolbar": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "copyable": true
+          },
+          "toolbarPosition": {
+            "input": "DropDownList",
+            "init": "top",
+            "dataSource": [
+              {
+                "name": "top"
+              },
+              {
+                "name": "bottom"
+              }
+            ]
+          },
+          "toolbar.backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "toolbar.showundoredo": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "disable": true
+          },
+          "toolbar.showfontfamily": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[toolbar.showfontfamily]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "0",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolbar.fontfamily]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolbar.fontfamily[*].name]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolbar.fontfamily[*].value]:}",
+                    "method": "hide",
+                    "value": "false",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[toolbar.fontfamily]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolbar.fontfamily[*].name]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[toolbar.fontfamily[*].value]:}",
+                    "method": "hide",
+                    "value": "true",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "toolbar.fontfamily": {
+            "input": "List",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "initForm",
+                    " postIndexChange"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[toolbar.fontfamily[*].name]:}",
+                    "method": "setValue",
+                    "value": "{@base:toolbar.fontfamily[@form[toolbar.fontfamily]:selectedIndex].name}"
+                  },
+                  {
+                    "target": "{@form[toolbar.fontfamily[*].name]:}",
+                    "method": "setPath",
+                    "value": "{\"toolbar.fontfamily[\" + @form[toolbar.fontfamily]:selectedIndex + \"].name\"}"
+                  },
+                  {
+                    "target": "{@form[toolbar.fontfamily[*].value]:}",
+                    "method": "setValue",
+                    "value": "{@base:toolbar.fontfamily[@form[toolbar.fontfamily]:selectedIndex].value}"
+                  },
+                  {
+                    "target": "{@form[toolbar.fontfamily[*].value]:}",
+                    "method": "setPath",
+                    "value": "{\"toolbar.fontfamily[\" + @form[toolbar.fontfamily]:selectedIndex + \"].value\"}"
+                  }
+                ]
+              },
+              {
+                "condition": {
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[SelectedIndex]:}",
+                    "method": "setMax",
+                    "value": "{@base:toolbar.fontfamily.length - 1}",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "toolbar.fontfamily[*].name": {
+            "input": "TextInput",
+            "copyable": true
+          },
+          "toolbar.fontfamily[*].value": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "toolbar.showfontsize": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "toolbar.showtextalignment": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "disable": true
+          },
+          "toolbar.showtextcolor": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "disable": true
+          },
+          "toolbar.showbold": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "disable": true
+          },
+          "toolbar.showitalic": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "disable": true
+          },
+          "toolbar.showunderline": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "disable": true
+          },
+          "toolbar.showorderedlist": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "toolbar.showunorderedlist": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "toolbar.showattachfile": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "toolbar.showattachimage": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "toolbar.showclear": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "true",
+            "disable": true
+          }
+        }
+      },
+      "TextPadding": {
+        "properties": {
+          "padding.top": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "1000",
+            "copyable": true
+          },
+          "padding.left": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "1000",
+            "copyable": true
+          },
+          "padding.right": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "1000",
+            "copyable": true
+          },
+          "padding.bottom": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "1000",
+            "copyable": true
+          }
+        }
+      },
+      "Actions": {
+        "properties": {
+          "actions.DidBeginEditing": {
+            "input": "LabelWithButton"
+          },
+          "actions.DidEndEditing": {
+            "input": "LabelWithButton"
+          },
+          "actions.DidChange": {
+            "input": "LabelWithButton"
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "350",
+            "min": "100",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "72",
+            "min": "60",
+            "max": "10000",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

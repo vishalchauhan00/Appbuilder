@@ -1,0 +1,193 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "HeatMap",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_map.png",
+      "description": "Here is the label description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "vendor": {
+            "input": "DropDownList",
+            "init": "Google",
+            "dataSource": [
+              {
+                "name": "Google"
+              }
+            ]
+          },
+          "mapTypeId": {
+            "input": "DropDownList",
+            "init": "satellite",
+            "dataSource": [
+              {
+                "name": "satellite"
+              },
+              {
+                "name": "roadmap"
+              },
+              {
+                "name": "terrain"
+              },
+              {
+                "name": "hybrid"
+              }
+            ]
+          },
+          "initialPosition": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "zoom": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "13",
+            "min": "0",
+            "max": "21",
+            "copyable": true
+          },
+          "GPS": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "1",
+            "copyable": true
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Datablocks": {
+        "properties": {
+          "ServiceName": {
+            "input": "DropDownList",
+            "dataSource": [],
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "initForm",
+                    "postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[tablename]:}",
+                    "method": "setOptions",
+                    "value": "{@project:getDbTableDicsByServiceName(@form[ServiceName]:value)}"
+                  },
+                  {
+                    "target": "{@form[tablename]:}",
+                    "method": "setProperty",
+                    "value": "-1",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "tablename": {
+            "input": "DropDownList",
+            "dataSource": [],
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[tablename]:value}",
+                  "compareBy": "NE",
+                  "compareWith": "",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[latField]:}",
+                    "method": "setOptions",
+                    "value": "{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[lngField]:}",
+                    "method": "setOptions",
+                    "value": "{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}",
+                    "case": "true"
+                  }
+                ]
+              }
+            ]
+          },
+          "latField": {
+            "input": "DropDownList"
+          },
+          "lngField": {
+            "input": "DropDownList"
+          },
+          "where": {
+            "input": "TextInput"
+          }
+        }
+      },
+      "Actions": {
+        "properties": {
+          "actions.WillStartLoadingMap": {
+            "input": "LabelWithButton"
+          },
+          "actions.DidFinishLoadingMap": {
+            "input": "LabelWithButton"
+          },
+          "actions.DidFailLoadingMap": {
+            "input": "LabelWithButton"
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "300",
+            "min": "100",
+            "max": "9999",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "300",
+            "min": "100",
+            "max": "9999",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

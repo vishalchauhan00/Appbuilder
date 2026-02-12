@@ -1,0 +1,320 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "RadioButton",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_radiobutton.png",
+      "description": "Here is the RadioButtonView description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "groupname": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true,
+            "validators": [
+              "RequiredValueValidator"
+            ]
+          },
+          "groupNameField": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "title": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "fieldname": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true,
+            "validators": [
+              "RequiredValueValidator"
+            ]
+          },
+          "on": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "0",
+            "copyable": true
+          },
+          "normalImage": {
+            "input": "TextInputWithButton",
+            "dataType": "ImageFileDic",
+            "copyable": true
+          },
+          "selectedImage": {
+            "input": "TextInputWithButton",
+            "dataType": "ImageFileDic",
+            "copyable": true
+          },
+          "tooltip": {
+            "input": "TextInput",
+            "dataType": "String",
+            "copyable": true
+          },
+          "showElevation": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "enableRipple": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "borderWeight": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10",
+            "copyable": true
+          },
+          "borderColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "borderColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          }
+        }
+      },
+      "normalFont": {
+        "properties": {
+          "normalFont.fontName": {
+            "input": "DropDownList",
+            "dataType": "array",
+            "init": "system",
+            "copyable": true,
+            "dataSource": []
+          },
+          "normalFont.fontSize": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "14",
+            "min": "6",
+            "max": "100",
+            "copyable": true
+          },
+          "normalFont.fontWeight": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "disable": true
+          },
+          "normalFont.fontWeightNum": {
+            "input": "DropDownList",
+            "dataType": "Number",
+            "init": "400",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "100"
+              },
+              {
+                "name": "200"
+              },
+              {
+                "name": "300"
+              },
+              {
+                "name": "400"
+              },
+              {
+                "name": "500"
+              },
+              {
+                "name": "600"
+              },
+              {
+                "name": "700"
+              },
+              {
+                "name": "800"
+              },
+              {
+                "name": "900"
+              }
+            ]
+          },
+          "normalFont.fontStyle": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "underline": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "strikeout": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          },
+          "normalFont.textColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "normalFont.textAlignment": {
+            "input": "RadioButton",
+            "dataType": "custom",
+            "init": "left",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "left"
+              },
+              {
+                "name": "center"
+              },
+              {
+                "name": "right"
+              }
+            ]
+          },
+          "verticalAlignment": {
+            "input": "RadioButton",
+            "dataType": "custom",
+            "init": "middle",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "top"
+              },
+              {
+                "name": "middle"
+              },
+              {
+                "name": "bottom"
+              }
+            ]
+          }
+        }
+      },
+      "TextPadding": {
+        "properties": {
+          "padding.top": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.left": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.right": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          },
+          "padding.bottom": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "2",
+            "min": "0",
+            "max": "100",
+            "copyable": true
+          }
+        }
+      },
+      "Actions": {
+        "properties": {
+          "actions.Selected": {
+            "input": "LabelWithButton"
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "150",
+            "min": "44",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "44",
+            "min": "20",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.rotation": {
+            "input": "NumericStepper",
+            "min": "0",
+            "max": "360",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

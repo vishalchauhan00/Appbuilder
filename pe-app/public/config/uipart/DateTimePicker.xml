@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="DateTimePicker" mockup="" visible="true" imagePath="assets/toolbox/ico_pickerdate.png" description=""
+		helpLink_EN="" helpLink_JP="">
+	<properties>
+		<type name="Type" @stopCommit="true">
+			<property path="name" input="spark.components.TextInput">
+				<validations>
+					<validation validator="UniqUINameValidator">
+						<args>
+							<arg property="currentSettings" value="{@currentSettings:}"/>
+							<arg property="pageContainerDic" value="{@page:}"/>
+							<arg property="uiPartDic" value="{@base:}"/>
+							<arg property="tableViewCellDic" value="{@tableviewCell:}"/>
+							<arg property="toolbarUiDic" value="{@toolbarUiDic:}"/>
+						</args>
+					</validation>
+				</validations>
+			</property>
+			<property path="fieldname" input="spark.components.DropDownList123">
+				<dataSource source="@dbTable:fieldswithBracket" labelField="fieldname" />
+				<dependentActions>
+					<when condition="compare" compareTarget="@dbTable:" compareBy="IS_NULL_OR_EMPTY" at="initForm" @stopCommit="true">
+						<action target="{@form[fieldname]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[fieldname]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[fieldname]:}" method="setOptions" value="@dbTable:fieldswithBracket" labelField="fieldname" caseOf="false"/> 
+					</when>
+					<when condition="compare" compareTarget="{@form[fieldname]:value}" compareBy="IS_NULL_OR_EMPTY" at="postCommit">
+						<action target="{@form[currentTime]:}" method="setValue" value="{@form[fieldname]:value}" chainedEvent="change" caseOf="false"/>
+					</when>
+				</dependentActions>
+			</property>
+
+			<property path="mode" input="spark.components.DropDownList" dataType="array" init="Time" copyable="true"> 
+				<dataSource>
+					<data name="Time" />
+					<data name="DateTime" />
+				</dataSource>
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[mode]:value}" compareBy="EQ" compareWith="Time" at="initForm, postCommit">
+    		        	<action target="{@form[currentTime]:}" method="folded" value="false" caseOf="true"/>
+			            <action target="{@form[currentDate]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[currentDateTime]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[timeFormat]:}" method="folded" value="false" caseOf="true"/>
+			        </when>
+	 		        <when condition="compare" compareTarget="{@form[mode]:value}" compareBy="EQ" compareWith="DateTime" at="initForm, postCommit">
+						<action target="{@form[currentDateTime]:}" method="folded" value="false" caseOf="true"/>
+			            <action target="{@form[currentTime]:}" method="folded" value="true" caseOf="true"/>
+			            <action target="{@form[currentDate]:}" method="folded" value="true" caseOf="true"/>
+			            <action target="{@form[timeFormat]:}" method="folded" value="false" caseOf="true"/>
+					</when>
+			    </dependentActions>
+			</property>
+			<property formKey="currentTime" path="currentDate" input="DateFieldEditor" copyable="true" mode="Time"/>
+			<property formKey="currentDateTime" path="currentDate" input="DateFieldEditor" copyable="true" mode="DateAndTime"/>			
+			<property path="placeholder" dataType="String" input="spark.components.TextInput" maxlength="50" copyable="true"/>
+			<property path="setInputlabel" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property path="timeFormat" input="spark.components.DropDownList" dataType="array" init="24 Hour" copyable="true">
+				<dataSource>
+					<data name="12 Hour"/>
+					<data name="24 Hour"/>
+				</dataSource>
+			</property>
+			<property path="timeviewRenderer" input="spark.components.DropDownList" dataType="array" init="DigitalClock" copyable="true">
+				<dataSource>
+					<data name="DigitalClock"/>
+					<data name="TimeClock"/>
+				</dataSource>
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[timeviewRenderer]:value}" compareBy="EQ" compareWith="DigitalClock" at="initForm, postCommit">
+    		        	<action target="{@form[isMultiSection]:}" method="folded" value="false" caseOf="true"/>
+						<action method="dependentConditions" caseOf="true">
+							<when condition="compare" compareTarget="{@form[isMultiSection]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+								<action target="{@form[timeSteps.hours]:}" method="folded" value="false" caseOf="true"/>
+			            		<action target="{@form[timeSteps.minutes]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[timeSteps.hours]:}" method="folded" value="true" caseOf="false"/>
+			            		<action target="{@form[timeSteps.minutes]:}" method="folded" value="true" caseOf="false"/>
+							</when>
+						</action>
+			        </when>
+	 		        <when condition="compare" compareTarget="{@form[timeviewRenderer]:value}" compareBy="EQ" compareWith="TimeClock" at="initForm, postCommit">
+						<action target="{@form[isMultiSection]:}" method="folded" value="true" caseOf="true"/>
+			            <action target="{@form[timeSteps.hours]:}" method="folded" value="true" caseOf="true"/>
+			            <action target="{@form[timeSteps.minutes]:}" method="folded" value="true" caseOf="true"/>
+					</when>
+			    </dependentActions>
+			</property>
+			<property path="isMultiSection" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true" >
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[isMultiSection]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[timeSteps.hours]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[timeSteps.minutes]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[timeSteps.hours]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[timeSteps.minutes]:}" method="folded" value="true" caseOf="false"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property path="timeSteps.hours" input="spark.components.NumericStepper" min="1" max="12" inc="1" copyable="true"/>
+			<property path="timeSteps.minutes" input="spark.components.NumericStepper" min="5" max="30" inc="5" copyable="true"/>
+			<property path="showIcon" dataType="Boolean" input="spark.components.CheckBox" value="true" copyable="true" />
+			<property path="showElevation" dataType="Boolean" input="spark.components.CheckBox" value="false" disable="true"/>
+			<property path="hidden" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+		</type>
+		<type name="Style" @stopCommit="true">
+			<property path="backgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="backgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="borderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" copyable="true"/>
+			<property path="borderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="borderColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="cornerRadius" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" init="0" copyable="true"/>
+		</type>
+		<type name="Font" @stopCommit="true">
+	    	<property path="font.fontName" input="spark.components.DropDownList" dataType="array" init="system" copyable="true">
+				<dataSource source="{@base:getFontNames()}" />
+			</property>
+			<property path="font.fontSize" dataType="Number" input="spark.components.NumericStepper" min="6" max="100" inc="1" init="14" copyable="true"/>
+			<property path="font.textColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="font.textAlignment" dataType="custom" input="spark.components.RadioButton" init="left" copyable="true">
+				<dataSource>
+					<data name="left" path="left"/>
+					<data name="center" path="center"/>
+					<data name="right" path="right"/>
+				</dataSource>
+			</property>
+			<property path="verticalAlignment" dataType="custom" input="spark.components.RadioButton" init="middle" copyable="true">
+				<dataSource>
+					<data name="top" path="top"/>
+					<data name="middle" path="middle"/>
+					<data name="bottom" path="bottom"/>
+				</dataSource>
+			</property>
+			<property path="placeholderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+		</type>
+		<type name="TextPadding" @stopCommit="true">
+			<property path="padding.top" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+			<property path="padding.left" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+			<property path="padding.right" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+			<property path="padding.bottom" dataType="Number" input="spark.components.NumericStepper" min="0" max="100" inc="1" init="2" copyable="true"/>
+		</type>
+		<type name="Actions">
+			<property path="actions.valueChanged" input="LabelWithButton" />
+		</type>
+		<type name="Geometry" @stopCommit="true">
+			<property path="frame.x" dataType="Number" input="spark.components.NumericStepper" min="0" max="9999" copyable="true"/>
+			<property path="frame.y" dataType="Number" input="spark.components.NumericStepper" min="0" max="9999" copyable="true"/>
+			<property path="frame.width" dataType="Number" input="spark.components.NumericStepper" min="50" max="400" init="150" copyable="true"/>
+			<property path="frame.height" dataType="Number" input="spark.components.NumericStepper" min="40" max="400" init="40" copyable="true"/>
+		</type> 
+	</properties>
+</item>

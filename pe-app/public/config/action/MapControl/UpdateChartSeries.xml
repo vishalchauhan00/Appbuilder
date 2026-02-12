@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="UpdateChartSeries" category="GoogleChartAction" type="GoogleChart" method="UpdateChartSeries">
+	<properties>
+		<type name="parameters" input="None">			
+			<property path="params.targetPage" input="spark.components.DropDownList">
+			    <validations><validation validator="RequiredValueValidator"/></validations>
+			    <dataSource source="{@project:getPageCacheList()}" labelField="Title" valueField="pageid"/>
+				<dependentActions>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@project:getPageViewType(@form[params.targetPage]:value)}" compareBy="EQ" compareWith="">						
+						<action target="{@form[params.name]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[Name]:}" method="folded" value="true" caseOf="true"/>
+					</when>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@project:getPageViewType(@form[params.targetPage]:value)}" compareBy="EQ" compareWith="BaseView">						
+						<action target="{@form[params.name]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.name]:}" method="setOptions" value="{@base:getSpecificTargetUIParts(@form[params.targetPage]:value, @form[base.currentSettings]:value)}" labelField="uiname" valueField="uiname" caseOf="true"/>
+						<action target="{@form[params.name]:}"  method="setProperty" property="selectedIndex" value="-1" caseOf="true"/> 
+						<action target="{@form[Name]:}" method="folded" value="true" caseOf="true"/>
+					</when>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@project:getPageViewType(@form[params.targetPage]:value)}" compareBy="EQ" compareWith="ScrollView">						
+						<action target="{@form[params.name]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.name]:}" method="setOptions" value="{@base:getSpecificTargetUIParts(@form[params.targetPage]:value, @form[base.currentSettings]:value)}" labelField="uiname" valueField="uiname" caseOf="true"/>
+						<action target="{@form[params.name]:}"  method="setProperty" property="selectedIndex" value="-1" caseOf="true"/> 
+						<action target="{@form[Name]:}" method="folded" value="true" caseOf="true"/>
+					</when>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@project:getPageViewType(@form[params.targetPage]:value)}" compareBy="EQ" compareWith="SplitView">						
+						<action target="{@form[params.name]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.name]:}" method="setOptions" value="{@base:getSpecificTargetUIParts(@form[params.targetPage]:value, @form[base.currentSettings]:value)}" labelField="uiname" valueField="uiname" caseOf="true"/>
+						<action target="{@form[params.name]:}"  method="setProperty" property="selectedIndex" value="-1" caseOf="true"/> 
+						<action target="{@form[Name]:}" method="folded" value="true" caseOf="true"/>
+					</when>
+					<when at="postCommit" condition="compare" compareTarget="{@project:getPageViewType(@form[params.targetPage]:value)}" compareBy="EQ" compareWith="TableView">
+						<action target="{@form[params.name]:}"  method="setProperty" property="selectedIndex" value="-1" caseOf="true"/> 
+						<action target="{@form[params.name]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[Name]:}" method="folded" value="false" caseOf="true"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property path="params.name" input="spark.components.DropDownList">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+				<dependentActions>
+					<when at="initForm" condition="compare" compareTarget="{@project:getPageViewType(@form[params.targetPage]:value)}" compareBy="EQ" compareWith="TableView">					
+  						<action target="{@form[params.name]:}" method="folded" value="true" caseOf="true"/>
+  					</when>						
+				</dependentActions>
+			</property>
+			<property formKey="Name" path="params.name" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>
+
+			<property path="params.ServiceName" input="spark.components.DropDownList">
+				<dataSource source="@project:getServices()" labelField="label" valueField="value"/>
+				<dependentActions>
+					<when at="initForm,postCommit" stopCommit="true">
+						<action target="{@form[params.tablename]:}" method="setOptions" value="{@project:getDbTableDicsByServiceName(@form[params.ServiceName]:value)}" labelField="tablename" valueField="tablename"/>
+						<action target="{@form[params.tablename]:}"  method="setProperty" property="selectedIndex" value="-1" caseOf="true"/> 
+					</when>
+				</dependentActions>
+			</property>
+			<property path="params.tablename" input="spark.components.DropDownList">
+				<dataSource source="@project:getDbTableDicsByServiceName(@form[params.ServiceName]:value)" labelField="tablename" valueField="tablename"/>
+				<dependentActions>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[params.tablename]:value}" compareBy="NE" compareWith="">						
+						<action target="{@form[params.itemField]:}" method="setOptions" value="{@project:getBracedDbFields(@form[params.ServiceName]:value, @form[params.tablename]:value)}" labelField="fieldname" valueField="fieldname" caseOf="true"/>
+						<action target="{@form[params.valueField]:}" method="setOptions" value="{@project:getBracedDbFields(@form[params.ServiceName]:value, @form[params.tablename]:value)}" labelField="fieldname" valueField="fieldname" caseOf="true"/>
+						<action target="{@form[params.dataFields[*].fieldname]:}" method="setOptions" value="{@project:getBracedDbFields(@form[params.ServiceName]:value, @form[params.tablename]:value)}" labelField="fieldname" valueField="fieldname" caseOf="true"/>
+						<action target="{@form[params.seriesField]:}" method="setOptions" value="{@project:getBracedDbFields(@form[params.ServiceName]:value, @form[params.tablename]:value)}" labelField="fieldname" valueField="fieldname" caseOf="true"/>
+						<action target="{@form[params.styleField]:}" method="setOptions" value="{@project:getBracedDbFields(@form[params.ServiceName]:value, @form[params.tablename]:value)}" labelField="fieldname" valueField="fieldname" caseOf="true"/>
+						<action target="{@form[params.annotationField]:}" method="setOptions" value="{@project:getBracedDbFields(@form[params.ServiceName]:value, @form[params.tablename]:value)}" labelField="fieldname" valueField="fieldname" caseOf="true"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property path="params.reference" input="spark.components.CheckBox" init="0">
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[params.reference]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[params.refTablename]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.refTablename]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.refItemField]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.refItemField]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.refdataFields]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.refdataFields]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.refDisplayText]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.refDisplayText]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.refSeriesColor]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.refSeriesColor]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.tablename]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.tablename]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.itemField]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.itemField]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.dataFields]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.dataFields]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.dataFields[*].fieldname]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.dataFields[*].fieldname]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.dataFields[*].displaytext]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.dataFields[*].displaytext]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.dataFields[*].seriescolor]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.dataFields[*].seriescolor]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.dataFields[*].pointShape]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.dataFields[*].pointShape]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.dataFields[*].fillpoints]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.dataFields[*].fillpoints]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.styleField]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.styleField]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.annotationField]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.annotationField]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[params.seriesField]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.seriesField]:}" method="folded" value="false" caseOf="false"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property path="params.refTablename" input="spark.components.TextInput"/>
+			<property path="params.refItemField" input="spark.components.TextInput"/>
+			<property path="params.refdataFields" input="spark.components.TextInput"/>
+			<property path="params.refDisplayText" input="spark.components.TextInput"/>
+			<property path="params.refSeriesColor" input="spark.components.TextInput"/>
+			<property path="params.itemField" input="spark.components.DropDownList"/>
+			<property formKey="params.dataFields" path="params.dataFields" input="spark.components.List" labelField="fieldname" copyable="true"/>
+			<property path="params.dataFields[*].fieldname" input="spark.components.DropDownList" copyable="true"/>
+			<property path="params.dataFields[*].displaytext" input="spark.components.TextInput" copyable="true"/>
+			<property path="params.dataFields[*].seriescolor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="params.dataFields[*].pointShape" input="spark.components.DropDownList" init="circle" disable="true">
+				<dataSource>
+					<data name="triangle"/>
+					<data name="circle"/>
+					<data name="oval"/>
+					<data name="square"/>
+					<data name="diamond"/>
+					<data name="star"/>
+					<data name="polygon"/>				
+				</dataSource>
+			</property>
+			<property path="params.dataFields[*].fillpoints" input="spark.components.CheckBox" value="true" disable="true"/>
+			<property path="params.styleField" input="spark.components.DropDownList" disable="true"/>
+			<property path="params.annotationField" input="spark.components.DropDownList" disable="true"/>
+			<property path="params.seriesField" input="spark.components.DropDownList" disable="true"/>
+		</type>
+		<type name="condition" input="HRule">
+			<property path="params.condition" input="LabelWithButton"/>
+		</type>
+		<type name="resultEvents" input="HRule">
+			<property path="actions.success" input="LabelWithButton"/>
+			<property path="actions.error" input="LabelWithButton"/>
+		</type>
+	</properties>
+</item>

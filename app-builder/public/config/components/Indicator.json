@@ -1,0 +1,88 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "Indicator",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_indicator.png",
+      "description": "Here is the label description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "Style": {
+            "input": "DropDownList",
+            "dataType": "String",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "White"
+              },
+              {
+                "name": "Gray"
+              }
+            ]
+          },
+          "InitialState": {
+            "input": "DropDownList",
+            "dataType": "String",
+            "init": "stop",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "start"
+              },
+              {
+                "name": "stop"
+              }
+            ]
+          },
+          "StarthidesWhenStopped": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "copyable": true
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "44",
+            "min": "20",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "44",
+            "min": "20",
+            "max": "10000",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

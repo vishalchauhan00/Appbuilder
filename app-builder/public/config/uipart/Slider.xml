@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="Slider" mockup="com.mobilous.builder.client.pageeditor.editor.mockup.Slider.SliderView" visibleInTableView="true" visible="true" imagePath="assets/toolbox/ico_slider.png" description="Here is the label description"
+		helpLink_EN="/slider2.htm" helpLink_JP="/sheet002.htm#RANGE!A1300">
+	<properties>
+		<type name="Type" @stopCommit="true">
+			<property path="name" input="spark.components.TextInput">
+				<validations>
+					<validation validator="UniqUINameValidator">
+						<args>
+							<arg property="currentSettings" value="{@currentSettings:}"/>
+							<arg property="pageContainerDic" value="{@page:}"/>
+							<arg property="uiPartDic" value="{@base:}"/>
+							<arg property="tableViewCellDic" value="{@tableviewCell:}"/>
+							<arg property="toolbarUiDic" value="{@toolbarUiDic:}"/>
+						</args>
+					</validation>
+				</validations>
+			</property>
+			<property path="direction" input="spark.components.DropDownList" dataType="array" init="Horizontal" copyable="true"> 
+				<dataSource>
+					<data name="Horizontal" />
+					<data name="Vertical" />
+				</dataSource>
+			</property>
+			<property path="type" input="spark.components.DropDownList" dataType="array" init="Default" copyable="true"> 
+				<dataSource>
+					<data name="Default" />
+					<data name="Range" />
+					<data name="Discrete" />
+				</dataSource>
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[type]:value}" compareBy="EQ" compareWith="Default" at="initForm, postCommit">
+					 	<action target="{@form[currentValue]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[minimumValue]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[maximumValue]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[stepValue]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[isCustomMarks]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[marks]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[marks[*].label]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[marks[*].value]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[ServiceName]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[tablename]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[where]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[sort]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[fieldname]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[displayText]:}" method="folded" value="true" caseOf="true"/>
+					</when>
+					 <when condition="compare" compareTarget="{@form[type]:value}" compareBy="EQ" compareWith="Range" at="initForm, postCommit">
+					 	<action target="{@form[currentValue]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[minimumValue]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[maximumValue]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[stepValue]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[isCustomMarks]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[marks]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[marks[*].label]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[marks[*].value]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[ServiceName]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[tablename]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[where]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[sort]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[fieldname]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[displayText]:}" method="folded" value="true" caseOf="true"/>
+					</when>
+					<when condition="compare" compareTarget="{@form[type]:value}" compareBy="EQ" compareWith="Discrete" at="initForm, postCommit">
+						<action target="{@form[minimumValue]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[maximumValue]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[stepValue]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[isCustomMarks]:}" method="folded" value="false" caseOf="true"/>
+						<action method="dependentConditions" caseOf="true">
+							<when condition="compare" compareTarget="{@form[isCustomMarks]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+								<action target="{@form[marks]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[marks[*].label]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[marks[*].value]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[ServiceName]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[tablename]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[where]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[sort]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[fieldname]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[displayText]:}" method="folded" value="false" caseOf="true"/>
+								<action target="{@form[marks]:}" method="folded" value="true" caseOf="false"/>
+								<action target="{@form[marks[*].label]:}" method="folded" value="true" caseOf="false"/>
+								<action target="{@form[marks[*].value]:}" method="folded" value="true" caseOf="false"/>
+								<action target="{@form[ServiceName]:}" method="folded" value="true" caseOf="false"/>
+								<action target="{@form[tablename]:}" method="folded" value="true" caseOf="false"/>
+								<action target="{@form[where]:}" method="folded" value="true" caseOf="false"/>
+								<action target="{@form[sort]:}" method="folded" value="true" caseOf="false"/>
+								<action target="{@form[fieldname]:}" method="folded" value="true" caseOf="false"/>
+								<action target="{@form[displayText]:}" method="folded" value="true" caseOf="false"/>
+							</when>
+						</action>
+					</when>
+			    </dependentActions>
+			</property>	
+			<property path="currentValue" dataType="Number" input="spark.components.NumericStepper" init="50" min="0" max="10000" useForDbField="true" copyable="true"/>
+			<property path="minimumValue" dataType="Number" input="spark.components.NumericStepper" init="0" min="0" max="100000" copyable="true">
+				<dependentActions>
+					<when at="initForm, postCommit">						
+						<action target="{@form[currentValue]:}" method="setMin" value="{@form[minimumValue]:value}" caseOf="true"/>
+						<action target="{@form[currentValue]:}" method="setMax" value="{@form[maximumValue]:value}" caseOf="true"/>
+					</when>
+					<when at="postCommit">						
+						<action target="{@form[currentValue]:}" method="init" value="{@form[minimumValue]:value}" caseOf="true"/>
+					</when>
+				</dependentActions>
+			</property>	
+			<property path="maximumValue" dataType="Number" input="spark.components.NumericStepper" init="100" min="0" max="100000000" copyable="true">
+				<dependentActions>
+					<when at="initForm, postCommit">
+						<action target="{@form[currentValue]:}" method="setMin" value="{@form[minimumValue]:value}" caseOf="true"/>
+						<action target="{@form[currentValue]:}" method="setMax" value="{@form[maximumValue]:value}" caseOf="true"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property path="stepValue" dataType="Number" input="spark.components.NumericStepper" init="10" min="0" max="1000000" copyable="true">
+			</property>
+			<property path="valueLabelDisplay" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>	
+			<property path="isCustomMarks" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true">
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[isCustomMarks]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[marks]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[marks[*].label]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[marks[*].value]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[displayMarkValue]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[ServiceName]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[tablename]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[where]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[sort]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[fieldname]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[displayText]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[marks]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[marks[*].label]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[marks[*].value]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[displayMarkValue]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[ServiceName]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[tablename]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[where]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[sort]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[fieldname]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[displayText]:}" method="folded" value="true" caseOf="false"/>
+					</when>
+			    </dependentActions>
+			</property>		
+			<property path="marks" input="spark.components.List" itemClass="com.mobilous.builder.client.lib.adf.uiparts.ComboBoxDataItemDic" labelField="label" valueField="value" dragEnabled="true" sortable="false" copyable="true">
+				 <dependentActions>
+					<when at="initForm, postIndexChange">
+					    <action target="{@form[marks[*].label]:}" method="setValue" value="{@base:marks[@form[marks]:selectedIndex].label}"/>
+					    <action target="{@form[marks[*].label]:}" method="setPath" value="{&quot;marks[&quot; + @form[marks]:selectedIndex + &quot;].label&quot;}"/>
+					    <action target="{@form[marks[*].value]:}" method="setValue" value="{@base:marks[@form[marks]:selectedIndex].value}"/>
+					    <action target="{@form[marks[*].value]:}" method="setPath" value="{&quot;marks[&quot; + @form[marks]:selectedIndex + &quot;].value&quot;}"/>
+					</when>
+					<when stopCommit="true" at="initForm, postCommit">
+						<action target="{@form[SelectedIndex]:}" method="setMax" value="{@base:marks.length - 1}" caseOf="true"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property formKey="marks[*].label" path="marks[*].label" input="spark.components.TextInput" copyable="true"/>
+			<property formKey="marks[*].value" path="marks[*].value" dataType="String" input="spark.components.TextInput" copyable="true"/>
+			<property path="displayMarkValue" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>	
+			<property path="ServiceName" input="spark.components.DropDownList" disable="true">
+				<dataSource source="@project:getServices()" labelField="label" valueField="value"/>
+				<dependentActions>
+					<when at="initForm,postCommit" stopCommit="true">
+						<action target="{@form[tablename]:}" method="setOptions" value="{@project:getDbTableDicsByServiceName(@form[ServiceName]:value)}" labelField="tablename" valueField="tablename"/>
+						<action target="{@form[tablename]:}" method="setProperty" property="selectedIndex" value="-1"/>
+						<action target="{@form[fieldname]:}" method="setOptions" value="{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}" labelField="fieldname" valueField="fieldname"/>
+						<action target="{@form[displayText]:}" method="setOptions" value="{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}" labelField="fieldname" valueField="fieldname"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property path="tablename" input="spark.components.DropDownList" disable="true">
+				<dataSource source="@project:getDbTableDicsByServiceName(@form[ServiceName]:value)" labelField="tablename" valueField="tablename"/>
+				<dependentActions>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[tablename]:value}" compareBy="NE" compareWith="">						
+						<action target="{@form[fieldname]:}" method="setOptions" value="{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}" labelField="fieldname" valueField="fieldname" caseOf="true"/>
+						<action target="{@form[displayText]:}" method="setOptions" value="{@project:getBracedDbFields(@form[ServiceName]:value, @form[tablename]:value)}" labelField="fieldname" valueField="fieldname" caseOf="true"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property path="where" input="spark.components.TextInput" validator="whereClauseValidator" disable="true"/>
+			<property path="sort" input="spark.components.TextInput" disable="true"/>
+			<property path="fieldname" input="spark.components.DropDownList" disable="true" />
+			<property path="displayText" input="spark.components.TextInput" validator="emptyDisplayText" disable="true"/>			
+			<property path="hidden" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+		</type>
+		<type name="Style" @stopCommit="true">
+			<property path="backgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" init="0" copyable="true"/>
+			<property path="thumbGradientColor1" dataType="ColorDic" input="mx.controls.ColorPicker" init="0" copyable="true"/>
+			<property path="thumbCustomIcon" input="TextInputWithButton" disable="true"/>
+			<property path="trackGradientColor1" dataType="ColorDic" input="mx.controls.ColorPicker" init="0" copyable="true"/>
+			<property path="trackGradientColor2" dataType="ColorDic" input="mx.controls.ColorPicker" init="0" copyable="true"/>
+			<property path="trackSize" input="spark.components.DropDownList" dataType="array" init="Default" copyable="true"> 
+				<dataSource>
+					<data name="Default" />
+					<data name="Small" />
+				</dataSource>
+			</property>
+		</type>		
+		<type name="Actions">
+			<property path="actions.valueChanged" input="LabelWithButton" />
+		</type>
+		<type name="Geometry" @stopCommit="true">
+			<property path="frame.x" dataType="Number" input="spark.components.NumericStepper" min="0" max="10000" copyable="true"/>
+			<property path="frame.y" dataType="Number" input="spark.components.NumericStepper" min="0" max="10000" copyable="true"/>
+			<property path="frame.width" dataType="Number" input="spark.components.NumericStepper" min="44" max="10000" init="70" copyable="true"/>
+			<property path="frame.height" dataType="Number" input="spark.components.NumericStepper" min="10" max="10000" init="44" copyable="true"/>
+		</type> 
+	</properties>
+</item>

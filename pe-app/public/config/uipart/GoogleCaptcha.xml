@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="GoogleCaptcha" mockup="" visible="true" imagePath="assets/toolbox/ico_map.png" description="Here is the label description"
+		helpLink_EN="" helpLink_JP="">
+	<properties>
+		<type name="Type" @stopCommit="true">
+			<property path="name" input="spark.components.TextInput">
+				<validations>
+					<validation validator="UniqUINameValidator">
+						<args>
+							<arg property="currentSettings" value="{@currentSettings:}"/>
+							<arg property="pageContainerDic" value="{@page:}"/>
+							<arg property="uiPartDic" value="{@base:}"/>
+							<arg property="tableViewCellDic" value="{@tableviewCell:}"/>
+							<arg property="toolbarUiDic" value="{@toolbarUiDic:}"/>
+						</args>
+					</validation>
+				</validations>
+			</property>
+			<property path="sitekey" dataType="String" input="spark.components.TextInput" copyable="true"/>	
+			<property path="type" input="spark.components.DropDownList" init="Checkbox" copyable="true">
+				<dataSource>
+					<data name="Checkbox"/>
+					<data name="Invisible"/>
+				</dataSource>
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[type]:value}" compareBy="EQ" compareWith="Checkbox" at="initForm, postCommit">
+						<action target="{@form[theme]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[size]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[badge]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[theme]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[size]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[badge]:}" method="folded" value="false" caseOf="false"/>						
+					</when>
+					<when condition="compare" compareTarget="{@form[type]:value}" compareBy="EQ" compareWith="Invisible" at="initForm, postCommit">
+						<action target="{@form[theme]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[size]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[badge]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[theme]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[size]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[badge]:}" method="folded" value="true" caseOf="false"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property path="theme" input="spark.components.DropDownList" init="light" copyable="true">
+				<dataSource>
+					<data name="light"/>
+					<data name="dark"/>
+				</dataSource>
+			</property>
+			<property path="size" input="spark.components.DropDownList" init="normal" copyable="true">
+				<dataSource>
+					<data name="normal"/>
+					<data name="compact"/>
+				</dataSource>
+			</property>	
+			<property path="badge" input="spark.components.DropDownList" init="bottomright" copyable="true">
+				<dataSource>
+					<data name="bottomright"/>
+					<data name="bottomleft"/>
+				</dataSource>
+			</property>		
+			<property path="hidden" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+		</type>
+		<type name="Actions">
+			<property path="actions.onSuccess" input="LabelWithButton" />			
+			<property path="actions.onError" input="LabelWithButton" />
+		</type>
+		<type name="Geometry" @stopCommit="true">
+			<property path="frame.x" dataType="Number" input="spark.components.NumericStepper" min="0" max="9999" copyable="true"/>
+			<property path="frame.y" dataType="Number" input="spark.components.NumericStepper" min="0" max="9999" copyable="true"/>
+			<property path="frame.width" dataType="Number" input="spark.components.NumericStepper" min="40" max="200" init="183" disable="true"/>
+			<property path="frame.height" dataType="Number" input="spark.components.NumericStepper" min="40" max="40" init="40" disable="true"/>
+		</type> 
+	</properties>
+</item>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="CallPublicAPI" category="ComAction" type="Comm" method="CallPublicAPI"
+		helpLink_EN="" helpLink_JP="">
+	<properties>
+		<type name="parameters" input="None">
+			<property path="params.type" input="spark.components.DropDownList">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+				<dataSource>
+					<data name="REST"/>			
+				</dataSource>
+			</property>
+			<property path="params.baseurl" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>
+			<property path="params.endpoint" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>
+			<property path="params.method" input="spark.components.DropDownList">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+				<dataSource>
+					<data name="GET"/>	
+					<data name="POST"/>			
+				</dataSource>
+				<dependentActions>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[params.method]:value}" compareBy="EQ" compareWith="GET">						
+						<action target="{@form[params.queryparams]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.queryparams[*].key]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.queryparams[*].value]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.body_type]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_raw]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].key]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].value]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].key]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].value]:}" method="folded" value="true" caseOf="true"/>						
+						<action target="{@form[params.queryparams]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.queryparams[*].key]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.queryparams[*].value]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[params.body_type]:}" method="folded" value="false" caseOf="false"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property labelField="key" path="params.queryparams" input="spark.components.List" itemClass="com.mobilous.builder.client.lib.adf.action.RecordValueDic">
+				<dependentActions>
+					<when at="initForm, postIndexChange">
+						<action target="{@form[params.queryparams[*].key]:}" method="setValue" 
+								value="{@base:params.queryparams[@form[params.queryparams]:selectedIndex].key}"/>
+						<action target="{@form[params.queryparams[*].key]:}" method="setPath"
+								value="{&quot;params.queryparams[&quot; + @form[params.queryparams]:selectedIndex + &quot;].key&quot;}"/>		
+						<action target="{@form[params.queryparams[*].value]:}" method="setValue" 
+								value="{@base:params.queryparams[@form[params.queryparams]:selectedIndex].value}"/>
+						<action target="{@form[params.queryparams[*].value]:}" method="setPath"
+								value="{&quot;params.queryparams[&quot; + @form[params.queryparams]:selectedIndex + &quot;].value&quot;}"/>						
+					</when>	
+				</dependentActions>
+			</property>
+			<property formKey="params.queryparams[*].key" path="params.queryparams[*].key" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>	
+			<property formKey="params.queryparams[*].value" path="params.queryparams[*].value" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>	
+			<property path="params.body_type" input="spark.components.DropDownList">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+				<dataSource>
+					<data name="raw"/>
+					<data name="form-data"/>
+					<data name="x-www-form-urlencoded"/>			
+				</dataSource>
+				<dependentActions>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[params.body_type]:value}" compareBy="EQ" compareWith="">						
+						<action target="{@form[params.body_raw]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].key]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].value]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].key]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].value]:}" method="folded" value="true" caseOf="true"/>	
+					</when>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[params.body_type]:value}" compareBy="EQ" compareWith="raw">						
+						<action target="{@form[params.body_raw]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.body_formdata]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].key]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].value]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].key]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].value]:}" method="folded" value="true" caseOf="true"/>	
+					</when>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[params.body_type]:value}" compareBy="EQ" compareWith="form-data">						
+						<action target="{@form[params.body_raw]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].key]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].value]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].key]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].value]:}" method="folded" value="true" caseOf="true"/>	
+					</when>
+					<when at="initForm, postCommit" condition="compare" compareTarget="{@form[params.body_type]:value}" compareBy="EQ" compareWith="x-www-form-urlencoded">						
+						<action target="{@form[params.body_raw]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].key]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_formdata[*].value]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].key]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[params.body_urlencoded[*].value]:}" method="folded" value="false" caseOf="true"/>	
+					</when>
+				</dependentActions>
+			</property>
+			<property path="params.body_raw" dataType="JSON" input="JsonInput"/>
+			<property labelField="key" path="params.body_formdata" input="spark.components.List" itemClass="com.mobilous.builder.client.lib.adf.action.RecordValueDic">
+				<dependentActions>
+					<when at="initForm, postIndexChange">
+						<action target="{@form[params.body_formdata[*].key]:}" method="setValue" 
+								value="{@base:params.body_formdata[@form[params.body_formdata]:selectedIndex].key}"/>
+						<action target="{@form[params.body_formdata[*].key]:}" method="setPath"
+								value="{&quot;params.body_formdata[&quot; + @form[params.body_formdata]:selectedIndex + &quot;].key&quot;}"/>		
+						<action target="{@form[params.body_formdata[*].value]:}" method="setValue" 
+								value="{@base:params.body_formdata[@form[params.body_formdata]:selectedIndex].value}"/>
+						<action target="{@form[params.body_formdata[*].value]:}" method="setPath"
+								value="{&quot;params.body_formdata[&quot; + @form[params.body_formdata]:selectedIndex + &quot;].value&quot;}"/>						
+					</when>	
+				</dependentActions>
+			</property>
+			<property formKey="params.body_formdata[*].key" path="params.body_formdata[*].key" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>	
+			<property formKey="params.body_formdata[*].value" path="params.body_formdata[*].value" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>
+			<property labelField="key" path="params.body_urlencoded" input="spark.components.List" itemClass="com.mobilous.builder.client.lib.adf.action.RecordValueDic">
+				<dependentActions>
+					<when at="initForm, postIndexChange">
+						<action target="{@form[params.body_urlencoded[*].key]:}" method="setValue" 
+								value="{@base:params.body_urlencoded[@form[params.body_urlencoded]:selectedIndex].key}"/>
+						<action target="{@form[params.body_urlencoded[*].key]:}" method="setPath"
+								value="{&quot;params.body_urlencoded[&quot; + @form[params.body_urlencoded]:selectedIndex + &quot;].key&quot;}"/>		
+						<action target="{@form[params.body_urlencoded[*].value]:}" method="setValue" 
+								value="{@base:params.body_urlencoded[@form[params.body_urlencoded]:selectedIndex].value}"/>
+						<action target="{@form[params.body_urlencoded[*].value]:}" method="setPath"
+								value="{&quot;params.body_urlencoded[&quot; + @form[params.body_urlencoded]:selectedIndex + &quot;].value&quot;}"/>						
+					</when>	
+				</dependentActions>
+			</property>
+			<property formKey="params.body_urlencoded[*].key" path="params.body_urlencoded[*].key" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>	
+			<property formKey="params.body_urlencoded[*].value" path="params.body_urlencoded[*].value" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>
+
+		  	<property path="params.headers.authorization" input="spark.components.TextInput"/>
+			<property path="params.headers.contenttype" input="spark.components.DropDownList">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+				<dataSource>
+					<data name="application/json"/>			
+				</dataSource>
+			</property>
+			<property path="params.headers.accept" input="spark.components.DropDownList" disable="true">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+				<dataSource>
+					<data name="application/json"/>			
+				</dataSource>
+			</property>
+			<property path="params.headers.customheader" input="spark.components.TextInput"/>
+			<property path="params.timeout" input="spark.components.NumericStepper" min="0" max="1000" inc="1" init="0"/>
+
+		</type>
+		<type name="condition" input="HRule">
+			<property path="params.condition" input="LabelWithButton"/>
+		</type>
+		<type name="resultEvents" input="HRule">
+			<property path="actions.success" input="LabelWithButton"/>
+			<property path="actions.error" input="LabelWithButton"/>
+			<property path="actions.timeout" input="LabelWithButton"/>
+		</type>
+	</properties>
+</item>

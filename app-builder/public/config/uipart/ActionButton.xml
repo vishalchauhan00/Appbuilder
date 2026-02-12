@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="ActionButton" mockup="" visible="true" visibleInTableView="true"  visibleInTableViewCell="false" imagePath="" description=""
+		helpLink_EN="" helpLink_JP="">
+	<properties>
+		<type name="Type" @stopCommit="true">
+			<property path="name" input="spark.components.TextInput">
+				<validations>
+					<validation validator="UniqUINameValidator">
+						<args>
+							<arg property="currentSettings" value="{@currentSettings:}"/>
+							<arg property="pageContainerDic" value="{@page:}"/>
+							<arg property="uiPartDic" value="{@base:}"/>
+							<arg property="tableViewCellDic" value="{@tableviewCell:}"/>
+							<arg property="toolbarUiDic" value="{@toolbarUiDic:}"/>
+						</args>
+					</validation>
+				</validations>
+			</property>
+			<property path="tooltip" dataType="String" input="spark.components.TextInput" copyable="true"/>
+		    <property path="floating" dataType="Boolean" input="spark.components.CheckBox" value="false" disable="true"/>
+			<property path="variant" input="spark.components.DropDownList" init="" sortable="false" disable="true">
+				<dataSource>
+					<data name=""/>
+					<data name="extended"/>
+				</dataSource>
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[variant]:value}" compareBy="EQ" compareWith="extended" at="initForm, postCommit">
+						<action target="{@form[title]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[title]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[iconPosition]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[iconPosition]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[normalFont.fontName]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[normalFont.fontName]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[normalFont.fontSize]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[normalFont.fontSize]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[normalFont.fontWeight]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[normalFont.fontWeight]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[normalFont.fontStyle]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[normalFont.fontStyle]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[normalFont.textColor]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[normalFont.textColor]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[normalFont.textAlignment]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[normalFont.textAlignment]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[verticalAlignment]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[verticalAlignment]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[frame.width]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[frame.width]:}" method="folded" value="true" caseOf="false"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property path="title" dataType="String" input="spark.components.TextInput" maxlength="50" copyable="true"/>
+			<property path="iconPosition" input="spark.components.DropDownList" init="start" sortable="false">
+				<dataSource>
+					<data name="start"/>
+					<data name="end"/>
+				</dataSource>
+			</property>
+			<property path="iconType" input="spark.components.DropDownList" init="add" sortable="false">
+				<dataSource>
+					<data name="add"/>
+					<data name="back"/>
+					<data name="bookmark"/>
+					<data name="camera"/>
+					<data name="compose"/>
+					<data name="fast-forward"/>
+					<data name="organize"/>
+					<data name="pause"/>
+					<data name="play"/>
+					<data name="refresh"/>
+					<data name="reply"/>
+					<data name="rewind"/>
+					<data name="search"/>
+					<data name="settings"/>
+					<data name="stop"/>
+					<data name="trash"/>
+					<data name="custom"/>
+				</dataSource>
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[iconType]:value}" compareBy="EQ" compareWith="custom" at="initForm, postCommit">
+						<action target="{@form[customImage]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[customImage]:}" method="folded" value="true" caseOf="false"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property formKey="customImage" path="customImage" input="TextInputWithButton" copyable="true"/>
+			<property path="size" input="spark.components.DropDownList" dataType="array" init="medium" sortable="false">
+				<dataSource>
+					<data name="small"/>
+					<data name="medium"/>
+					<data name="large"/>
+					<data name="xlarge"/>
+				</dataSource>
+			</property>
+			<property path="showElevation" dataType="Boolean" input="spark.components.CheckBox" value="true" copyable="true"/>
+			<property path="enableRipple" dataType="Boolean" input="spark.components.CheckBox" value="true" copyable="true"/>
+			<property path="hidden" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>			
+		</type>
+		<type name="Style" @stopCommit="true">	
+			<property path="backgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="backgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+		</type>
+		<type name="normalFont" @stopCommit="true">
+			<property path="normalFont.fontName" input="spark.components.DropDownList" dataType="array" init="system" copyable="true">
+				<dataSource source="{@base:getFontNames()}" />
+			</property>
+			<property path="normalFont.fontSize" dataType="Number" input="spark.components.NumericStepper" min="6" max="100" inc="1" init="14" copyable="true"/>
+			<property path="normalFont.fontWeight" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property path="normalFont.fontStyle" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property path="normalFont.textColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="normalFont.textAlignment" dataType="custom" input="spark.components.RadioButton" init="center" disable="true">
+				<dataSource>
+					<data name="left" path="left"/>
+					<data name="center" path="center"/>
+					<data name="right" path="right"/>
+				</dataSource>
+			</property>
+			<property path="verticalAlignment" dataType="custom" input="spark.components.RadioButton" init="middle" disable="true">
+				<dataSource>
+					<data name="top" path="top"/>
+					<data name="middle" path="middle"/>
+					<data name="bottom" path="bottom"/>
+				</dataSource>
+			</property>
+		</type>
+		<type name="Actions">
+			<property path="actions.clicked" input="LabelWithButton" />
+		</type>
+		<type name="Geometry" @stopCommit="true">
+			<property path="frame.x" dataType="Number" input="spark.components.NumericStepper" min="0" max="10000" copyable="true"/>
+			<property path="frame.y" dataType="Number" input="spark.components.NumericStepper" min="0" max="10000" copyable="true"/>
+			<property path="frame.width" dataType="Number" input="spark.components.NumericStepper" min="100" max="2000" init="100" copyable="true"/>
+		</type> 
+	</properties>
+</item>

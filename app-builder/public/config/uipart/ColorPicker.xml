@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="ColorPicker" mockup="" visible="true" imagePath="" description=""
+		helpLink_EN="" helpLink_JP="">
+	<properties>
+		<type name="Type" @stopCommit="true">
+			<property path="name" input="spark.components.TextInput">
+				<validations>
+					<validation validator="UniqUINameValidator">
+						<args>
+							<arg property="currentSettings" value="{@currentSettings:}"/>
+							<arg property="pageContainerDic" value="{@page:}"/>
+							<arg property="uiPartDic" value="{@base:}"/>
+							<arg property="tableViewCellDic" value="{@tableviewCell:}"/>
+							<arg property="toolbarUiDic" value="{@toolbarUiDic:}"/>
+						</args>
+					</validation>
+				</validations>
+			</property>
+			<property path="fieldname" input="spark.components.DropDownList123">
+				<dataSource source="@dbTable:fieldswithBracket" labelField="fieldname" />
+				<dependentActions>
+					<when condition="compare" compareTarget="@dbTable:" compareBy="IS_NULL_OR_EMPTY" at="initForm" @stopCommit="true">
+						<action target="{@form[fieldname]:}" method="folded" value="true" caseOf="true"/>
+						<action target="{@form[fieldname]:}" method="folded" value="false" caseOf="false"/>
+						<action target="{@form[fieldname]:}" method="setOptions" value="@dbTable:fieldswithBracket" labelField="fieldname" caseOf="false"/> 
+					</when>
+					<when condition="compare" compareTarget="{@form[fieldname]:value}" compareBy="IS_NULL_OR_EMPTY" at="postCommit">
+						<action target="{@form[currentDate]:}" method="setValue" value="{@form[fieldname]:value}" chainedEvent="change" caseOf="false"/>
+					</when>
+				</dependentActions>
+			</property>			
+			<property path="value" input="spark.components.TextInput" copyable="true">
+			</property>
+			<property path="showLabel" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true">
+			</property>
+			<property path="size" input="spark.components.DropDownList" dataType="array" init="medium" sortable="false">
+				<dataSource>
+					<data name="small"/>
+					<data name="medium"/>
+					<data name="large"/>
+					<data name="xlarge"/>
+				</dataSource>
+			</property>
+			<property path="hidden" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+		</type>
+		<type name="Style" @stopCommit="true">
+			<property path="backgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="backgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="borderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" disable="true"/>
+			<property path="cornerRadius" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" init="0" copyable="true"/>
+		</type>
+		<type name="Font" @stopCommit="true">
+	    	<property path="font.fontName" input="spark.components.DropDownList" dataType="array" init="system" copyable="true">
+				<dataSource source="{@base:getFontNames()}" />
+			</property>
+			<property path="font.fontSize" dataType="Number" input="spark.components.NumericStepper" min="6" max="100" inc="1" init="14" disable="true"/>
+			<property path="font.textColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+		</type>
+		<type name="Actions">
+			<property path="actions.valueChanged" input="LabelWithButton" />
+		</type>
+		<type name="Geometry" @stopCommit="true">
+			<property path="frame.x" dataType="Number" input="spark.components.NumericStepper" min="0" max="9999" copyable="true"/>
+			<property path="frame.y" dataType="Number" input="spark.components.NumericStepper" min="0" max="9999" copyable="true"/>
+			<property path="frame.width" dataType="Number" input="spark.components.NumericStepper" min="250" max="400" init="250" disable="true"/>
+			<property path="frame.height" dataType="Number" input="spark.components.NumericStepper" min="400" max="400" init="400" disable="true"/>
+		</type> 
+	</properties>
+</item>

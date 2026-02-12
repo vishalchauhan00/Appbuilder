@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="FormView" mockup="" visible="true" visibleInTableView="true" imagePath="" description=""	>
+	<properties>
+		<type name="Type" @stopCommit="true">
+			<property path="name" input="spark.components.TextInput">
+				<validations>
+					<validation validator="UniqUINameValidator">
+						<args>
+							<arg property="currentSettings" value="{@currentSettings:}"/>
+							<arg property="pageContainerDic" value="{@page:}"/>
+							<arg property="uiPartDic" value="{@base:}"/>
+							<arg property="tableViewCellDic" value="{@tableviewCell:}"/>
+							<arg property="toolbarUiDic" value="{@toolbarUiDic:}"/>
+						</args>
+					</validation>
+				</validations>
+			</property>
+			<property path="heading" input="spark.components.TextInput"/>
+			<property path="hidden" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+		</type>
+		<type name="Style" @stopCommit="true">
+			<property path="backgroundGradient" dataType="String" input="spark.components.TextInput"/>			
+			<property path="backgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="backgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="borderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="borderColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="borderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" init="0" copyable="true"/>
+			<property path="cornerRadius" dataType="Number" input="spark.components.NumericStepper" min="0" max="25" inc="1" init="0" copyable="true"/>
+			<property path="boxShadow" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true">
+				<dependentActions>
+					<when condition="compare" compareTarget="{@form[boxShadow]:value}" compareBy="EQ" compareWith="1" at="initForm, postCommit">
+						<action target="{@form[boxShadowWidth]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[boxShadowWidth]:}" method="folded" value="true" caseOf="false"/>
+						<action target="{@form[boxShadowColor]:}" method="folded" value="false" caseOf="true"/>
+						<action target="{@form[boxShadowColor]:}" method="folded" value="true" caseOf="false"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property path="boxShadowWidth" input="spark.components.NumericStepper" min="0" max="10" inc="1" copyable="true"/>
+			<property path="boxShadowColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+		</type>
+
+		<type name="FormContent">
+			<property path="formItems[0].gap" input="spark.components.NumericStepper" min="1" max="10000" inc="1" init="5" copyable="true"/>
+			<property formKey="formItems" path="formItems" input="spark.components.List" labelField="label" copyable="true"/>
+			<property formKey="formItems[*].label" path="formItems[*].label" input="spark.components.TextInput"/>
+			<property formKey="formItems[*].Fields" path="formItems[*]" input="LabelWithButton" popup="CellEditor" source="Form" fieldname="Fields">
+				<dependentActions>
+					<when at="preCommit" stopCommit="true">
+						<action target="{@form[formItems[*].Fields]:}" method="{@base:notifyChange()}"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property formKey="formItems[*].required" path="formItems[*].required" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property formKey="formItems[*].height" path="formItems[*].height" input="spark.components.NumericStepper" min="40" max="1000" inc="1" init="100" copyable="true"/>
+			<property path="columns" input="spark.components.List" labelField="width" valueField="width" dragEnabled="false" sortable="false" limit="5" copyable="true">
+				 <dependentActions>
+					<when at="initForm, postIndexChange">
+					    <action target="{@form[columns[*].width]:}" method="setValue" value="{@base:columns[@form[columns]:selectedIndex].width}"/>
+					    <action target="{@form[columns[*].width]:}" method="setPath" value="{&quot;columns[&quot; + @form[columns]:selectedIndex + &quot;].width&quot;}"/>
+					</when>
+				</dependentActions>
+			</property>
+			<property formKey="columns[*].width" path="columns[*].width" input="spark.components.NumericStepper" min="0.5" max="10" inc="0.1" init="1" copyable="true"/>
+		</type>		
+		<type name="HeaderStyle" @stopCommit="true">
+			<property path="headerfont.fontName" input="spark.components.DropDownList" dataType="array" init="system" copyable="true">
+				<dataSource source="{@base:getFontNames()}" />
+			</property>
+			<property path="headerfont.fontSize" dataType="Number" input="spark.components.NumericStepper" min="6" max="100" inc="1" init="14" copyable="true">
+			</property>
+			<property path="headerfont.fontWeight" input="spark.components.DropDownList" dataType="Number" init="400" copyable="true">
+				<dataSource>
+					<data name="100" />
+					<data name="200" />
+					<data name="300" />
+					<data name="400" />
+					<data name="500" />
+					<data name="600" />
+					<data name="700" />
+					<data name="800" />
+					<data name="900" />
+				</dataSource>
+			</property>
+			<property path="headerfont.fontStyle" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property path="headerfont.textColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="headerfont.textAlignment" dataType="custom" input="spark.components.RadioButton" init="left" disable="true">
+				<dataSource>
+					<data name="left" path="left"/>
+					<data name="center" path="center"/>
+					<data name="right" path="right"/>
+				</dataSource>
+			</property>
+		</type>
+		<type name="itemStyle">
+			<property path="itembackgroundGradient" dataType="String" input="spark.components.TextInput"/>
+			<property path="itembackgroundColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="itembackgroundColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="itemborderWeight" dataType="Number" input="spark.components.NumericStepper" min="0" max="10" inc="1" init="0" copyable="true"/>
+			<property path="itemborderColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="itemborderColor.alpha" input="spark.components.NumericStepper" min="0.0" max="1.0" inc="0.1" copyable="true"/>
+			<property path="itemcornerRadius" dataType="Number" input="spark.components.NumericStepper" min="0" max="25" inc="1" init="0" copyable="true"/>
+			<property path="itemfont.fontName" input="spark.components.DropDownList" dataType="array" init="system" copyable="true">
+				<dataSource source="{@base:getFontNames()}" />
+			</property>
+			<property path="itemfont.fontSize" dataType="Number" input="spark.components.NumericStepper" min="6" max="100" inc="1" init="14" copyable="true">
+			</property>
+			<property path="itemfont.fontWeight" input="spark.components.DropDownList" dataType="Number" init="400" copyable="true">
+				<dataSource>
+					<data name="100" />
+					<data name="200" />
+					<data name="300" />
+					<data name="400" />
+					<data name="500" />
+					<data name="600" />
+					<data name="700" />
+					<data name="800" />
+					<data name="900" />
+				</dataSource>
+			</property>
+			<property path="itemfont.fontStyle" dataType="Boolean" input="spark.components.CheckBox" value="false" copyable="true"/>
+			<property path="itemfont.textColor" dataType="ColorDic" input="mx.controls.ColorPicker" copyable="true"/>
+			<property path="itemfont.textAlignment" dataType="custom" input="spark.components.RadioButton" init="left" disable="true">
+				<dataSource>
+					<data name="left" path="left"/>
+					<data name="center" path="center"/>
+					<data name="right" path="right"/>
+				</dataSource>
+			</property>
+		</type>		
+		<type name="Padding" @stopCommit="true">
+			<property path="padding.top" dataType="Number" input="spark.components.NumericStepper" min="1" max="100" inc="1" init="10" copyable="true"/>
+			<property path="padding.left" dataType="Number" input="spark.components.NumericStepper" min="1" max="100" inc="1" init="10" copyable="true"/>
+			<property path="padding.right" dataType="Number" input="spark.components.NumericStepper" min="1" max="100" inc="1" init="10" copyable="true"/>
+			<property path="padding.bottom" dataType="Number" input="spark.components.NumericStepper" min="1" max="100" inc="1" init="10" copyable="true"/>
+		</type>
+		<type name="Geometry" @stopCommit="true">
+			<property path="frame.y" dataType="Number" input="spark.components.NumericStepper" min="0" max="10000" copyable="true"/>
+			<property path="frame.height" dataType="Number" input="spark.components.NumericStepper" min="20" max="10000" init="44" copyable="true"/>
+		</type>
+	</properties>
+</item>

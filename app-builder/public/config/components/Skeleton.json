@@ -1,0 +1,111 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "Skeleton",
+      "visible": true,
+      "imagePath": "",
+      "description": ""
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          },
+          "variant": {
+            "input": "DropDownList",
+            "dataType": "String",
+            "init": "rectangular",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "circular"
+              },
+              {
+                "name": "rectangular"
+              },
+              {
+                "name": "rounded"
+              }
+            ]
+          },
+          "animation": {
+            "input": "DropDownList",
+            "dataType": "String",
+            "init": "pulse",
+            "copyable": true,
+            "dataSource": [
+              {
+                "name": "none"
+              },
+              {
+                "name": "pulse"
+              },
+              {
+                "name": "wave"
+              }
+            ]
+          },
+          "hidden": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "false",
+            "copyable": true
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          }
+        }
+      },
+      "Geometry": {
+        "properties": {
+          "frame.x": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.y": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "min": "0",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.width": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "44",
+            "min": "20",
+            "max": "10000",
+            "copyable": true
+          },
+          "frame.height": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "44",
+            "min": "20",
+            "max": "10000",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}

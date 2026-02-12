@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+input.numinput
+{
+  display: block;
+  float: left;
+  padding: 0;
+  margin: 0;
+  padding-left: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  appearance: textfield;
+  -moz-appearance: textfield;
+  background: transparent;
+}
+input.numinput:focus {
+  outline: 0;
+  border: 1px solid #3f51b5;
+  box-shadow: rgba(63, 81, 181, 0.25) 0 0 0 0.1rem;
+}
+input.numinput::-webkit-inner-spin-button {
+  cursor: pointer;
+  height: 22px;
+  opacity: 1; /* magic! */
+  background: transparent;
+}
+
+.ComboBox
+{
+  display: block;
+  float: left;
+  padding: 0;
+  margin: 0;
+  padding-left: 8px;
+  background: transparent;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+.ComboBox:focus {
+  outline: 0;
+  border: 1px solid #3f51b5;
+  box-shadow: rgba(63, 81, 181, 0.25) 0 0 0 0.1rem;
+}
+.ComboBox::-webkit-calendar-picker-indicator {  
+  opacity:1; /* magic! */
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item targetClass="SendCustomEvents" category="LogsAnalyticsAction" type="LogsAnalytics" method="SendCustomEvents"
+		helpLink_EN="" helpLink_JP="">
+	<properties>
+		<type name="parameters" input="None">
+			<property path="params.provider" input="spark.components.DropDownList">
+				<dataSource>
+		   			<data name="Google Analytics"/>
+		  		</dataSource>
+			</property>
+			<property path="params.eventname" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+			</property>
+		
+			<property labelField="key" path="params.parameterList" input="spark.components.List" itemClass="com.mobilous.builder.client.lib.adf.action.RecordValueDic">
+				<dependentActions>
+					<when at="initForm, postIndexChange">
+						<action target="{@form[params.parameterList[*].key]:}" method="setValue" 
+								value="{@base:params.parameterList[@form[params.parameterList]:selectedIndex].key}"/>
+						<action target="{@form[params.parameterList[*].key]:}" method="setPath"
+								value="{&quot;params.parameterList[&quot; + @form[params.parameterList]:selectedIndex + &quot;].key&quot;}"/>		
+						<action target="{@form[params.parameterList[*].value]:}" method="setValue" 
+								value="{@base:params.parameterList[@form[params.parameterList]:selectedIndex].value}"/>
+						<action target="{@form[params.parameterList[*].value]:}" method="setPath"
+								value="{&quot;params.parameterList[&quot; + @form[params.parameterList]:selectedIndex + &quot;].value&quot;}"/>						
+					</when>
+				</dependentActions>
+			</property>
+			<property formKey="params.parameterList[*].key" path="params.parameterList[0].key" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>
+				
+			</property>
+			<property formKey="params.parameterList[*].value" path="params.parameterList[0].value" input="spark.components.TextInput">
+				<validations><validation validator="RequiredValueValidator"/></validations>				
+			</property>	
+			
+		</type>
+				
+		<type name="condition" input="HRule">
+			<property path="params.condition" input="LabelWithButton"/>
+		</type>
+		<type name="resultEvents" input="HRule">
+			<property path="actions.success" input="LabelWithButton"/>
+			<property path="actions.error" input="LabelWithButton"/>
+		</type>
+	</properties>
+</item>

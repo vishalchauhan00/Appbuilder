@@ -1,0 +1,277 @@
+{
+  "item": {
+    "meta": {
+      "targetClass": "Dialog",
+      "visible": true,
+      "imagePath": "assets/toolbox/ico_dialog.png",
+      "description": "Here is the label description"
+    },
+    "types": {
+      "General": {
+        "properties": {
+          "name": {
+            "input": "TextInput",
+            "validators": [
+              "UniqUINameValidator"
+            ]
+          }
+        }
+      },
+      "Style": {
+        "properties": {
+          "backgroundColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "backgroundColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "borderWeight": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "10",
+            "copyable": true
+          },
+          "borderColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "borderColor.alpha": {
+            "input": "NumericStepper",
+            "min": "0.0",
+            "max": "1.0",
+            "copyable": true
+          },
+          "cornerRadius": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "0",
+            "min": "0",
+            "max": "25",
+            "copyable": true
+          }
+        }
+      },
+      "DialogHeader": {
+        "properties": {
+          "showheader": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "1",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[showheader]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "0",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[heading]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[heading]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[headerfont.fontSize]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[headerfont.fontSize]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[headerfont.textColor]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[headerfont.textColor]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[showclose]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[showclose]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  },
+                  {
+                    "target": "{@form[closeIcon]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[closeIcon]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "heading": {
+            "input": "TextInput"
+          },
+          "headerfont.fontSize": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "16",
+            "min": "9",
+            "max": "30",
+            "copyable": true
+          },
+          "headerfont.textColor": {
+            "input": "ColorPicker",
+            "dataType": "ColorDic",
+            "copyable": true
+          },
+          "showclose": {
+            "input": "CheckBox",
+            "dataType": "Boolean",
+            "value": "1",
+            "copyable": true,
+            "dependentActions": [
+              {
+                "condition": {
+                  "type": "compare",
+                  "target": "{@form[showclose]:value}",
+                  "compareBy": "EQ",
+                  "compareWith": "0",
+                  "at": [
+                    "initForm",
+                    " postCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[closeIcon]:}",
+                    "method": "folded",
+                    "value": "true",
+                    "case": "true"
+                  },
+                  {
+                    "target": "{@form[closeIcon]:}",
+                    "method": "folded",
+                    "value": "false",
+                    "case": "false"
+                  }
+                ]
+              }
+            ]
+          },
+          "closeIcon": {
+            "input": "TextInputWithButton",
+            "dataType": "ImageFileDic",
+            "copyable": true
+          }
+        }
+      },
+      "DialogContent": {
+        "properties": {
+          "dataarray": {
+            "input": "List",
+            "source": "Dialog",
+            "copyable": true
+          },
+          "dataarray[*].height": {
+            "input": "NumericStepper",
+            "init": "100",
+            "min": "40",
+            "max": "10000",
+            "copyable": true
+          },
+          "dataarray[*]": {
+            "input": "LabelWithButton",
+            "popup": "CellEditor",
+            "source": "Dialog",
+            "dependentActions": [
+              {
+                "condition": {
+                  "at": [
+                    "preCommit"
+                  ]
+                },
+                "actions": [
+                  {
+                    "target": "{@form[dataarray[*].Fields]:}",
+                    "method": "{@base:notifyChange()}"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "Padding": {
+        "properties": {
+          "padding.top": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "10",
+            "min": "1",
+            "max": "1000",
+            "copyable": true
+          },
+          "padding.left": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "10",
+            "min": "1",
+            "max": "1000",
+            "copyable": true
+          },
+          "padding.right": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "10",
+            "min": "1",
+            "max": "1000",
+            "copyable": true
+          },
+          "padding.bottom": {
+            "input": "NumericStepper",
+            "dataType": "Number",
+            "init": "10",
+            "min": "1",
+            "max": "1000",
+            "copyable": true
+          }
+        }
+      }
+    }
+  }
+}
